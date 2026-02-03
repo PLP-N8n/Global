@@ -1,50 +1,56 @@
 import { Header, Footer } from "@/components/layout";
 import {
   Hero,
+  TrustBanner,
+  About,
   Products,
   Brands,
   Services,
-  About,
   Contact,
 } from "@/components/sections";
+import { WhatsAppFloat } from "@/components/ui";
 
 /**
  * Global Telecom Homepage
  *
- * Design Philosophy:
- * - Local, Established, Trustworthy, Quietly Confident
- * - "This is a real, reliable shop that has been here for years."
- *
- * The interface feels crafted, not automated.
- * Every visual decision answers: "Does this help a local customer
- * trust this shop within 5 seconds?"
+ * Design Philosophy: LUXURY
+ * - Clean, elegant, premium feel
+ * - Glassmorphism effects for modern touch
+ * - SEO-optimized section ordering
+ * - Trust-driven with local authority
  */
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-[var(--color-bg)]">
       <Header />
 
       <main className="flex-1">
-        {/* Hero - First impression, establish trust immediately */}
+        {/* Hero - First impression with immersive imagery */}
         <Hero />
 
-        {/* Products - What we offer, clear categories */}
-        <Products />
+        {/* Trust Banner - Authorized dealer badges (SEO: trust signals early) */}
+        <TrustBanner />
 
-        {/* Brands - Legitimacy through partnerships */}
-        <Brands />
-
-        {/* Services - Why choose us, value proposition */}
-        <Services />
-
-        {/* About - Our story, local roots */}
+        {/* About - Local story for SEO (moved up as requested) */}
         <About />
 
-        {/* Contact - Drive action: calls, WhatsApp, visits */}
+        {/* Products - Bento showcase */}
+        <Products />
+
+        {/* Brands - Authority through partnerships */}
+        <Brands />
+
+        {/* Services - Value propositions */}
+        <Services />
+
+        {/* Contact - Drive conversions */}
         <Contact />
       </main>
 
       <Footer />
+
+      {/* Floating WhatsApp button for mobile */}
+      <WhatsAppFloat />
     </div>
   );
 }
