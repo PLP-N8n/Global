@@ -1,98 +1,90 @@
 "use client";
 
-/**
- * About Section
- *
- * Tell the store's story with authenticity.
- * This is about establishing local roots and trust.
- *
- * Design: Warm, personal, but not overly casual.
- * "We're a real business with real people."
- */
+import { CheckCircle } from "lucide-react";
+
 export function About() {
   return (
-    <section id="about" className="section section-deep">
+    <section 
+      id="about" 
+      className="section bg-[var(--color-bg)]"
+      data-testid="about-section"
+    >
       <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Image/Visual area */}
-          <div className="order-2 lg:order-1">
-            {/* Placeholder for store interior/team photo */}
-            <div className="relative bg-[var(--color-paper)] rounded-lg overflow-hidden aspect-[4/3] shadow-md">
-              {/* Decorative frame */}
-              <div className="absolute inset-3 border border-[var(--color-brass)]/20 rounded" />
-
-              {/* Image placeholder */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                <div className="w-16 h-16 bg-[var(--color-paper-warm)] rounded-lg flex items-center justify-center mb-4">
-                  <span className="text-2xl font-bold text-[var(--color-ink-muted)]">
-                    GT
-                  </span>
-                </div>
-                <p className="text-[var(--color-ink-muted)] text-sm">
-                  [Store Interior Photo]
-                </p>
-                <p className="text-[var(--color-ink-muted)] text-xs mt-1">
-                  Replace with actual store image
-                </p>
-              </div>
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Image */}
+          <div className="relative order-2 lg:order-1">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
+              <img
+                src="https://images.unsplash.com/photo-1611755489400-3c53602ab783?crop=entropy&cs=srgb&fm=jpg&q=85"
+                alt="Premium Home Theater Setup at Global Telecom Panipat"
+                className="w-full h-full object-cover"
+              />
+              {/* Glass overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)]/40 to-transparent" />
             </div>
+            
+            {/* Floating Stats Card */}
+            <div className="absolute -bottom-6 -right-6 lg:right-6 card-glass p-6 max-w-[180px]">
+              <p className="text-4xl font-serif font-bold text-[var(--color-gold)] mb-1">15+</p>
+              <p className="text-sm text-[var(--color-text-muted)]">
+                Years of Trust
+                <br />
+                <span className="hindi text-xs">विश्वास के वर्ष</span>
+              </p>
+            </div>
+
+            {/* Decorative Gold Border */}
+            <div className="absolute -top-4 -left-4 w-24 h-24 border-l-4 border-t-4 border-[var(--color-gold)] rounded-tl-3xl" />
           </div>
 
           {/* Content */}
           <div className="order-1 lg:order-2">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-[var(--color-ink)] mb-4">
+            <span className="overline mb-4 block">Our Story</span>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-[var(--color-primary)] mb-4">
               About Global Telecom
             </h2>
-            <p className="text-xl text-[var(--color-brass)] font-medium hindi mb-6">
+            <p className="text-xl text-[var(--color-gold)] font-medium hindi mb-6">
               ग्लोबल टेलीकॉम के बारे में
             </p>
 
-            <div className="space-y-4 text-[var(--color-ink-light)] leading-relaxed">
+            <div className="space-y-4 text-[var(--color-text-muted)] leading-relaxed mb-8">
               <p>
                 Global Telecom has been serving the people of Panipat and surrounding
                 areas for over 15 years. What started as a small mobile phone shop
                 has grown into a trusted destination for all electronics needs.
               </p>
-
               <p>
                 We believe in building lasting relationships with our customers.
-                When you buy from us, you&apos;re not just making a purchase — you&apos;re
+                When you buy from us, you're not just making a purchase — you're
                 becoming part of a community that values honesty, quality, and
                 genuine service.
               </p>
-
-              <p className="hindi text-[var(--color-ink-muted)]">
+              <p className="hindi text-[var(--color-text-light)]">
                 हम अपने ग्राहकों के साथ स्थायी संबंध बनाने में विश्वास करते हैं।
-                जब आप हमसे खरीदते हैं, तो आप सिर्फ खरीदारी नहीं कर रहे - आप एक
-                परिवार का हिस्सा बन रहे हैं।
+                आप हमसे खरीदते हैं तो एक परिवार का हिस्सा बन जाते हैं।
               </p>
             </div>
 
-            {/* Store values */}
-            <div className="mt-8 pt-8 border-t border-[var(--color-paper)]">
-              <h3 className="text-lg font-semibold text-[var(--color-ink)] mb-4">
-                Our Promise
-              </h3>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { label: "Quality", desc: "गुणवत्ता" },
-                  { label: "Honesty", desc: "ईमानदारी" },
-                  { label: "Service", desc: "सेवा" },
-                  { label: "Value", desc: "मूल्य" },
-                ].map((value) => (
-                  <div
-                    key={value.label}
-                    className="bg-[var(--color-paper)] rounded-lg p-4"
-                  >
-                    <p className="font-semibold text-[var(--color-ink)]">
-                      {value.label}
-                    </p>
-                    <p className="text-sm text-[var(--color-ink-muted)] hindi">
-                      {value.desc}
-                    </p>
+            {/* Values */}
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { label: "Quality", labelHi: "गुणवत्ता" },
+                { label: "Honesty", labelHi: "ईमानदारी" },
+                { label: "Service", labelHi: "सेवा" },
+                { label: "Value", labelHi: "मूल्य" },
+              ].map((value) => (
+                <div
+                  key={value.label}
+                  className="flex items-center gap-3 p-4 bg-[var(--color-bg-deep)] rounded-xl border border-slate-200"
+                  data-testid={`value-${value.label.toLowerCase()}`}
+                >
+                  <CheckCircle size={20} className="text-[var(--color-gold)]" strokeWidth={1.5} />
+                  <div>
+                    <p className="font-semibold text-[var(--color-primary)]">{value.label}</p>
+                    <p className="text-xs text-[var(--color-text-light)] hindi">{value.labelHi}</p>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

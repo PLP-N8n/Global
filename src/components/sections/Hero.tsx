@@ -1,140 +1,142 @@
 "use client";
 
-import { Button, PhoneIcon, WhatsAppIcon, CheckCircleIcon } from "@/components/ui";
+import { MessageCircle, Phone, ChevronRight, Sparkles } from "lucide-react";
 
 const PHONE_NUMBER = "+91-1234567890";
 const WHATSAPP_NUMBER = "911234567890";
 
-const trustPoints = [
-  { text: "Authorized Dealer", textHi: "अधिकृत डीलर" },
-  { text: "Genuine Products", textHi: "असली उत्पाद" },
-  { text: "Expert Service", textHi: "विशेषज्ञ सेवा" },
-];
-
-/**
- * Hero Section
- *
- * The first impression - must establish trust within 5 seconds.
- * "This is a real, reliable shop that has been here for years."
- *
- * Design: Confident, grounded, not flashy or experimental.
- */
 export function Hero() {
   return (
-    <section className="relative bg-[var(--color-paper-warm)] overflow-hidden">
-      {/* Subtle decorative element */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
+    <section 
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      data-testid="hero-section"
+    >
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, var(--color-ink) 1px, transparent 0)`,
-          backgroundSize: "32px 32px",
+          backgroundImage: `url('https://images.unsplash.com/photo-1651275666236-8ecf57b4c66e?crop=entropy&cs=srgb&fm=jpg&q=85')`,
         }}
-      />
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-primary)]/90 via-[var(--color-primary)]/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)]/50 to-transparent" />
+      </div>
 
-      <div className="container mx-auto px-6 py-16 md:py-24 lg:py-32 relative">
+      {/* Content */}
+      <div className="container mx-auto px-6 relative z-10 pt-32 pb-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
-          <div className="max-w-xl">
-            {/* Trust badge */}
-            <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm mb-6">
-              <span className="w-2 h-2 bg-[var(--color-success)] rounded-full" />
-              <span className="text-sm font-medium text-[var(--color-ink-light)]">
-                Serving Panipat Since Establishment
-              </span>
+          {/* Left Content */}
+          <div className="max-w-2xl animate-fade-in-up">
+            {/* Overline */}
+            <div className="inline-flex items-center gap-2 mb-6">
+              <span className="overline text-[var(--color-gold)]">Authorized Dealer</span>
+              <span className="w-8 h-px bg-[var(--color-gold)]"></span>
+              <span className="text-white/60 text-sm">Est. Panipat</span>
             </div>
 
-            {/* Main headline */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-[var(--color-ink)] leading-tight mb-4">
-              Your Trusted
+            {/* Main Headline */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white leading-tight mb-6">
+              Premium
               <br />
-              <span className="text-[var(--color-brass)]">Electronics</span> Store
+              <span className="text-[var(--color-gold)]">Electronics</span>
+              <br />
+              for Modern Living
             </h1>
 
-            {/* Hindi tagline */}
-            <p className="text-xl md:text-2xl text-[var(--color-ink-muted)] mb-2 hindi font-medium">
-              आपका विश्वसनीय इलेक्ट्रॉनिक्स स्टोर
+            {/* Hindi Tagline */}
+            <p className="text-xl md:text-2xl text-white/80 mb-3 hindi font-medium">
+              आधुनिक जीवन के लिए प्रीमियम इलेक्ट्रॉनिक्स
             </p>
 
             {/* Subtitle */}
-            <p className="text-lg text-[var(--color-ink-light)] leading-relaxed mb-8 max-w-md">
-              Quality mobile phones, televisions, home appliances, and accessories.
-              Visit our store in Panipat or connect with us today.
+            <p className="text-lg text-white/70 leading-relaxed mb-8 max-w-lg">
+              Experience the finest collection of mobile phones, 4K televisions, 
+              and home appliances. Genuine products with official warranty.
             </p>
 
-            {/* Trust points */}
-            <div className="flex flex-wrap gap-4 mb-8">
-              {trustPoints.map((point) => (
-                <div
-                  key={point.text}
-                  className="flex items-center gap-2 text-[var(--color-ink-light)]"
-                >
-                  <CheckCircleIcon
-                    size={20}
-                    className="text-[var(--color-success)]"
-                  />
-                  <span className="text-sm font-medium">{point.text}</span>
+            {/* Trust Indicators */}
+            <div className="flex flex-wrap gap-6 mb-10">
+              {[
+                { label: "Genuine Products", labelHi: "असली उत्पाद" },
+                { label: "Official Warranty", labelHi: "आधिकारिक वारंटी" },
+                { label: "Expert Service", labelHi: "विशेषज्ञ सेवा" },
+              ].map((item) => (
+                <div key={item.label} className="flex items-center gap-2">
+                  <Sparkles size={16} className="text-[var(--color-gold)]" />
+                  <span className="text-white text-sm font-medium">{item.label}</span>
                 </div>
               ))}
             </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                as="a"
+              <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi, I'm interested in your products.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                variant="whatsapp"
-                size="lg"
-                icon={<WhatsAppIcon size={22} />}
+                className="btn btn-gold text-base px-8 py-4"
+                data-testid="hero-whatsapp-btn"
               >
+                <MessageCircle size={20} strokeWidth={1.5} />
                 Chat on WhatsApp
-              </Button>
-              <Button
-                as="a"
-                href={`tel:${PHONE_NUMBER}`}
-                variant="secondary"
-                size="lg"
-                icon={<PhoneIcon size={22} />}
+              </a>
+              <a
+                href="#products"
+                className="btn btn-glass text-base px-8 py-4 text-white border-white/30 hover:bg-white/10"
+                data-testid="hero-products-btn"
               >
-                Call Us Now
-              </Button>
+                View Products
+                <ChevronRight size={18} strokeWidth={1.5} />
+              </a>
             </div>
           </div>
 
-          {/* Visual/Image area */}
-          <div className="relative lg:pl-8">
-            {/* Placeholder for store image - replace with actual store photo */}
-            <div className="relative bg-[var(--color-paper-deep)] rounded-lg overflow-hidden aspect-[4/3] shadow-lg">
-              {/* Decorative frame */}
-              <div className="absolute inset-4 border-2 border-[var(--color-brass)]/20 rounded" />
-
-              {/* Image placeholder content */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                <div className="w-20 h-20 bg-[var(--color-ink)] rounded-xl flex items-center justify-center mb-4">
-                  <span className="text-[var(--color-paper)] font-bold text-3xl">G</span>
+          {/* Right Content - Glass Card */}
+          <div className="hidden lg:block">
+            <div className="card-glass p-8 max-w-sm ml-auto animate-fade-in-up stagger-2">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-16 h-16 bg-[var(--color-gold)]/20 rounded-2xl flex items-center justify-center">
+                  <Phone size={28} className="text-[var(--color-gold)]" />
                 </div>
-                <p className="text-[var(--color-ink-muted)] text-sm">
-                  [Store Photo]
-                </p>
-                <p className="text-[var(--color-ink-muted)] text-xs mt-1">
-                  Replace with actual store image
-                </p>
+                <div>
+                  <p className="text-sm text-slate-500">Visit Our Store</p>
+                  <p className="font-serif font-semibold text-[var(--color-primary)]">Main Market, GT Road</p>
+                </div>
               </div>
-            </div>
+              
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between py-2 border-b border-slate-200">
+                  <span className="text-slate-500">Mon - Sat</span>
+                  <span className="font-medium">10:00 AM - 8:00 PM</span>
+                </div>
+                <div className="flex justify-between py-2 border-b border-slate-200">
+                  <span className="text-slate-500">Sunday</span>
+                  <span className="font-medium">11:00 AM - 6:00 PM</span>
+                </div>
+                <div className="flex justify-between py-2">
+                  <span className="text-slate-500">Location</span>
+                  <span className="font-medium">Panipat, Haryana</span>
+                </div>
+              </div>
 
-            {/* Floating info card */}
-            <div className="absolute -bottom-4 -left-4 lg:left-0 bg-white rounded-lg shadow-md p-4 max-w-[200px]">
-              <p className="text-sm font-semibold text-[var(--color-ink)] mb-1">
-                Visit Our Store
-              </p>
-              <p className="text-xs text-[var(--color-ink-muted)]">
-                Main Market, GT Road
-                <br />
-                Panipat, Haryana
-              </p>
+              <a
+                href={`tel:${PHONE_NUMBER}`}
+                className="btn btn-primary w-full mt-6 justify-center"
+                data-testid="hero-call-btn"
+              >
+                <Phone size={18} strokeWidth={1.5} />
+                Call: {PHONE_NUMBER}
+              </a>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2">
+          <div className="w-1.5 h-1.5 bg-white/60 rounded-full animate-pulse" />
         </div>
       </div>
     </section>
