@@ -1,0 +1,147 @@
+{
+  "identity": {
+    "name": "Global Telecom",
+    "tagline": "Premium Electronics for the Modern Home",
+    "location": "Panipat, Haryana",
+    "tone": "Luxurious, Trustworthy, Local Authority, Tech-Forward"
+  },
+  "theme": {
+    "mode": "light",
+    "strategy": "Premium Light: High brightness, deep contrast text, gold accents. Avoids 'sterile' white by using warm off-whites and rich textures."
+  },
+  "typography": {
+    "headings": {
+      "family": "Playfair Display, serif",
+      "weights": ["600", "700"],
+      "usage": "All section titles, hero headlines. Letter-spacing: -0.02em."
+    },
+    "body": {
+      "family": "Manrope, sans-serif",
+      "weights": ["400", "500"],
+      "usage": "Paragraphs, UI elements, buttons. Clean and geometric."
+    },
+    "accent": {
+      "family": "Cinzel, serif",
+      "usage": "Small overlines, 'Authorized Dealer' badges."
+    }
+  },
+  "colors": {
+    "primary": {
+      "name": "Midnight Navy",
+      "hex": "#0F172A",
+      "tailwind": "bg-slate-900",
+      "usage": "Primary buttons, Footer background, Text headings"
+    },
+    "secondary": {
+      "name": "Champagne Gold",
+      "hex": "#D4AF37",
+      "tailwind": "text-amber-600",
+      "usage": "Accents, Borders, Icons, 'Sale' tags"
+    },
+    "background": {
+      "main": "#F8FAFC",
+      "card": "#FFFFFF",
+      "tailwind": "bg-slate-50"
+    },
+    "glass": {
+      "surface": "rgba(255, 255, 255, 0.7)",
+      "border": "rgba(255, 255, 255, 0.4)",
+      "blur": "backdrop-blur-xl"
+    }
+  },
+  "layout_strategy": {
+    "container": "max-w-7xl mx-auto px-6 md:px-12",
+    "spacing": "Generous. Section padding: py-24 or py-32. Gap: gap-8 or gap-12.",
+    "grid": "Bento Grid for products. Asymmetric layouts for 'About' section.",
+    "seo_structure": [
+      "Hero (H1: Main Keyword)",
+      "Trust Signals / Authorized Brands (H2)",
+      "About Global Telecom (Local Story) (H2)",
+      "Product Categories (H2)",
+      "Services (H2)",
+      "Testimonials (H2)",
+      "Contact / Location (H2)"
+    ]
+  },
+  "components": {
+    "Hero": {
+      "style": "Immersive",
+      "elements": [
+        "Full-screen background image (Store Interior)",
+        "Glassmorphism content card aligned left or center",
+        "Gold border accents",
+        "Primary CTA: 'Visit Store' (WhatsApp)",
+        "Secondary CTA: 'View Products'"
+      ]
+    },
+    "Brands": {
+      "style": "Trust Grid",
+      "elements": [
+        "Grayscale logos that turn color on hover",
+        "Clean grid layout (4-6 cols)",
+        "Heading: 'Authorized Partners'"
+      ]
+    },
+    "Products": {
+      "style": "Bento Showcase",
+      "elements": [
+        "Large 'Featured' item (TV/Home Theater)",
+        "Smaller grid items for Mobiles/Accessories",
+        "Hover: Zoom effect + Glass overlay with details"
+      ]
+    },
+    "Contact": {
+      "style": "Floating Glass Card",
+      "elements": [
+        "Google Maps embed background",
+        "Glass card overlay with Address & WhatsApp button",
+        "Bilingual text support (English/Hindi)"
+      ]
+    }
+  },
+  "visual_enhancers": {
+    "glassmorphism": "Use 'backdrop-blur-xl bg-white/60 border border-white/40 shadow-xl' for cards floating over images.",
+    "gradients": "Subtle gold-to-transparent gradients on borders only. No full-bg gradients.",
+    "shadows": "Soft, diffuse shadows: 'shadow-[0_8px_30px_rgb(0,0,0,0.04)]'.",
+    "borders": "1px solid borders in slate-200 for structure."
+  },
+  "assets": {
+    "images": {
+      "hero_bg": {
+        "url": "https://images.unsplash.com/photo-1651275666236-8ecf57b4c66e?crop=entropy&cs=srgb&fm=jpg&q=85",
+        "alt": "Luxury Electronics Store Interior Panipat",
+        "position": "center"
+      },
+      "about_bg": {
+        "url": "https://images.unsplash.com/photo-1611755489400-3c53602ab783?crop=entropy&cs=srgb&fm=jpg&q=85",
+        "alt": "Premium Home Theater Setup",
+        "position": "center"
+      },
+      "product_mobile": {
+        "url": "https://images.unsplash.com/photo-1760587162690-95608c8ab2da?crop=entropy&cs=srgb&fm=jpg&q=85",
+        "alt": "Latest Smartphones Display",
+        "position": "center"
+      },
+      "product_tv": {
+        "url": "https://images.unsplash.com/photo-1756729924301-4e55f111e986?crop=entropy&cs=srgb&fm=jpg&q=85",
+        "alt": "4K Smart TV Experience",
+        "position": "center"
+      }
+    },
+    "icons": "Use Lucide-React. Thin stroke (1.5px) for elegance."
+  },
+  "instructions_to_main_agent": [
+    "Implement the 'Playfair Display' font via Next.js Font optimization.",
+    "Ensure all text over images has a glass backing or heavy shadow for readability.",
+    "The 'WhatsApp' button must be sticky on mobile (bottom right).",
+    "Use the provided image URLs. Do not use placeholders.",
+    "Translate key CTAs to Hindi (e.g., 'Call Now' / 'अभी कॉल करें') in small subtext.",
+    "Prioritize the 'About' section higher up for SEO as requested."
+  ],
+  "universal_guidelines": [
+    "Do not use generic 'Inter' font for headings.",
+    "Avoid pure black (#000000). Use Slate-900 (#0F172A).",
+    "Ensure mobile responsiveness for the 'Bento' grid (collapse to 1 col).",
+    "Add 'data-testid' to all interactive elements."
+  ]
+}
