@@ -1,31 +1,24 @@
 "use client";
 
-import { ShieldIcon, TruckIcon, CheckCircleIcon } from "@/components/ui";
+import { Shield, Truck, Headphones, CheckCircle } from "lucide-react";
 
-interface Service {
-  icon: React.ReactNode;
-  title: string;
-  titleHi: string;
-  description: string;
-}
-
-const services: Service[] = [
+const services = [
   {
-    icon: <ShieldIcon size={28} />,
+    icon: Shield,
     title: "Genuine Products",
     titleHi: "असली उत्पाद",
     description:
-      "All products are sourced directly from authorized distributors. Every item comes with manufacturer warranty and GST bill.",
+      "All products sourced directly from authorized distributors. Every item comes with manufacturer warranty and GST bill.",
   },
   {
-    icon: <TruckIcon size={28} />,
+    icon: Truck,
     title: "Home Delivery",
     titleHi: "होम डिलीवरी",
     description:
       "Free delivery within Panipat city limits. Safe packaging and careful handling of all electronics.",
   },
   {
-    icon: <CheckCircleIcon size={28} />,
+    icon: Headphones,
     title: "After-Sales Support",
     titleHi: "बिक्री के बाद सेवा",
     description:
@@ -33,78 +26,79 @@ const services: Service[] = [
   },
 ];
 
-/**
- * Services Section
- *
- * Communicate the value-adds that make this a trustworthy shop.
- * Focus on practical benefits, not marketing speak.
- *
- * Design: Clear, direct communication. No fluff.
- */
+const benefits = [
+  "GST billing on all purchases",
+  "Price match with authorized dealers",
+  "Easy EMI options available",
+  "Exchange offers on select products",
+  "Expert product guidance",
+];
+
 export function Services() {
   return (
-    <section id="services" className="section bg-[var(--color-paper)]">
+    <section 
+      id="services" 
+      className="section bg-[var(--color-bg-deep)]"
+      data-testid="services-section"
+    >
       <div className="container mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-[var(--color-ink)] mb-4">
-            Why Choose Us
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="overline mb-4 block">Why Choose Us</span>
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-[var(--color-primary)] mb-4">
+            Our Services
           </h2>
-          <p className="text-xl text-[var(--color-brass)] font-medium hindi mb-3">
+          <p className="text-xl text-[var(--color-gold)] font-medium hindi mb-4">
             हमें क्यों चुनें
           </p>
-          <p className="text-[var(--color-ink-light)] leading-relaxed">
-            More than just a store — we&apos;re your local electronics partner.
+          <p className="text-[var(--color-text-muted)] leading-relaxed">
+            More than just a store — we're your trusted electronics partner.
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-3 gap-8 md:gap-12">
-          {services.map((service) => (
-            <div key={service.title} className="text-center">
-              {/* Icon */}
-              <div className="w-16 h-16 mx-auto mb-5 bg-[var(--color-brass)]/10 rounded-full flex items-center justify-center text-[var(--color-brass)]">
-                {service.icon}
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          {services.map((service, index) => (
+            <div
+              key={service.title}
+              className="card card-gold-border text-center hover:shadow-xl"
+              data-testid={`service-${index}`}
+            >
+              <div className="w-16 h-16 mx-auto mb-6 bg-[var(--color-gold)]/10 rounded-2xl flex items-center justify-center">
+                <service.icon size={28} className="text-[var(--color-gold)]" strokeWidth={1.5} />
               </div>
 
-              {/* Title */}
-              <h3 className="text-xl font-semibold text-[var(--color-ink)] mb-2">
+              <h3 className="text-xl font-serif font-semibold text-[var(--color-primary)] mb-2">
                 {service.title}
               </h3>
-              <p className="text-sm text-[var(--color-brass)] hindi mb-3">
+              <p className="text-sm text-[var(--color-gold)] hindi mb-4">
                 {service.titleHi}
               </p>
 
-              {/* Description */}
-              <p className="text-[var(--color-ink-muted)] leading-relaxed text-sm max-w-sm mx-auto">
+              <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
                 {service.description}
               </p>
             </div>
           ))}
         </div>
 
-        {/* Additional benefits */}
-        <div className="mt-16 bg-[var(--color-paper-warm)] rounded-lg p-8 md:p-10">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+        {/* Benefits Section */}
+        <div className="card-glass p-8 md:p-12 rounded-3xl">
+          <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
-              <h3 className="text-2xl font-serif font-bold text-[var(--color-ink)] mb-4">
+              <h3 className="text-2xl md:text-3xl font-serif font-bold text-[var(--color-primary)] mb-6">
                 Shop with Confidence
               </h3>
-              <ul className="space-y-3">
-                {[
-                  "GST billing on all purchases",
-                  "Price match with authorized dealers",
-                  "Easy EMI options available",
-                  "Exchange offers on select products",
-                  "Expert product guidance",
-                ].map((benefit) => (
+              <ul className="space-y-4">
+                {benefits.map((benefit) => (
                   <li
                     key={benefit}
-                    className="flex items-center gap-3 text-[var(--color-ink-light)]"
+                    className="flex items-center gap-3 text-[var(--color-text-muted)]"
                   >
-                    <CheckCircleIcon
-                      size={18}
-                      className="text-[var(--color-success)] flex-shrink-0"
+                    <CheckCircle
+                      size={20}
+                      className="text-[var(--color-gold)] flex-shrink-0"
+                      strokeWidth={1.5}
                     />
                     <span>{benefit}</span>
                   </li>
@@ -112,15 +106,15 @@ export function Services() {
               </ul>
             </div>
 
-            <div className="text-center md:text-right">
-              <div className="inline-block bg-white rounded-lg p-6 shadow-sm">
-                <p className="text-4xl font-serif font-bold text-[var(--color-brass)] mb-2">
+            <div className="text-center">
+              <div className="inline-block bg-white rounded-2xl p-8 shadow-lg border border-[var(--color-gold)]/20">
+                <p className="text-5xl font-serif font-bold text-[var(--color-gold)] mb-2">
                   15+
                 </p>
-                <p className="text-[var(--color-ink-muted)] text-sm">
+                <p className="text-[var(--color-text-muted)]">
                   Years of Trust
                   <br />
-                  <span className="hindi">विश्वास के वर्ष</span>
+                  <span className="hindi text-sm">विश्वास के वर्ष</span>
                 </p>
               </div>
             </div>
