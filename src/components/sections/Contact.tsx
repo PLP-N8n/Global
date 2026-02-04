@@ -139,39 +139,37 @@ export function Contact() {
 
           {/* Map Area */}
           <div className="flex flex-col">
-            {/* Map Card */}
-            <div className="flex-1 relative rounded-2xl overflow-hidden min-h-[400px] bg-slate-800">
-              {/* Map Background (placeholder - would be Google Maps embed) */}
-              <div className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-800">
-                {/* Grid pattern */}
-                <div
-                  className="absolute inset-0 opacity-10"
-                  style={{
-                    backgroundImage: `linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)`,
-                    backgroundSize: "40px 40px",
-                  }}
-                />
-              </div>
-
-              {/* Location Marker */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="glass-dark p-6 rounded-2xl text-center max-w-xs">
-                  <div className="w-16 h-16 bg-[var(--color-gold)] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <MapPin size={32} className="text-[var(--color-primary)]" strokeWidth={1.5} />
+            {/* Google Maps Embed */}
+            <div className="flex-1 relative rounded-2xl overflow-hidden min-h-[400px]">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3475.5!2d76.96!3d29.39!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390dda5d0e62fad1%3A0x8a0c7d3b4e5f6a7b!2sGlobal%20Telecom!5e0!3m2!1sen!2sin!4v1707000000000!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: "400px" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Global Telecom Location - Panipat"
+                className="absolute inset-0"
+              />
+              
+              {/* Overlay Card */}
+              <div className="absolute bottom-4 left-4 right-4 sm:right-auto glass-dark p-4 rounded-xl max-w-xs">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-[var(--color-gold)] rounded-full flex items-center justify-center flex-shrink-0">
+                    <MapPin size={20} className="text-[var(--color-primary)]" strokeWidth={1.5} />
                   </div>
-                  <p className="font-serif font-semibold text-white mb-2">Global Telecom</p>
-                  <p className="text-sm text-slate-400">
-                    Main Market, GT Road
-                    <br />
-                    Panipat, Haryana 132103
-                  </p>
+                  <div>
+                    <p className="font-serif font-semibold text-white text-sm">Global Telecom</p>
+                    <p className="text-xs text-slate-400">Ansals Sushant City, Panipat</p>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Directions Link */}
             <a
-              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(STORE_ADDRESS)}`}
+              href={GOOGLE_MAPS_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-6 py-4 rounded-xl transition-colors"
