@@ -4,7 +4,9 @@ import { Phone, MessageCircle, MapPin, Clock, Navigation } from "lucide-react";
 
 const PHONE_NUMBER = "+91-1234567890";
 const WHATSAPP_NUMBER = "911234567890";
-const STORE_ADDRESS = "Main Market, GT Road, Panipat, Haryana 132103";
+const STORE_ADDRESS = "Barsat Rd, near Pahwa Sweets, Ansals Sushant City, Noorwala, Panipat, Haryana 132103";
+const GOOGLE_MAPS_EMBED = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3475.123456789!2d76.96!3d29.39!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sGlobal%20Telecom!5e0!3m2!1sen!2sin!4v1234567890";
+const GOOGLE_MAPS_LINK = "https://maps.app.goo.gl/7XaNqPsxR5quucRb7";
 const STORE_HOURS = {
   weekdays: "Monday - Saturday: 10:00 AM - 8:00 PM",
   sunday: "Sunday: 11:00 AM - 6:00 PM",
