@@ -3,7 +3,7 @@ import { Phone, MessageCircle, MapPin, Clock } from "lucide-react";
 
 const PHONE_NUMBER = "+91-1234567890";
 const WHATSAPP_NUMBER = "911234567890";
-const STORE_ADDRESS = "Main Market, GT Road, Panipat, Haryana 132103";
+const STORE_ADDRESS = "Barsat Rd, near Pahwa Sweets, Ansals Sushant City, Noorwala, Panipat, Haryana 132103";
 const STORE_HOURS = "Mon-Sat: 10AM - 8PM | Sun: 11AM - 6PM";
 
 const quickLinks = [
