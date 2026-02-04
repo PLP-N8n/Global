@@ -2,8 +2,8 @@
 
 import { MessageCircle, Phone, ChevronRight, Sparkles } from "lucide-react";
 
-const PHONE_NUMBER = "+91-1234567890";
-const WHATSAPP_NUMBER = "911234567890";
+const PHONE_NUMBER = "+91 98126 33000";
+const WHATSAPP_NUMBER = "919812633000";
 
 export function Hero() {
   return (
