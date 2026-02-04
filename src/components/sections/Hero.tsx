@@ -95,13 +95,13 @@ export function Hero() {
           {/* Right Content - Glass Card */}
           <div className="hidden lg:block">
             <div className="card-glass p-8 max-w-sm ml-auto animate-fade-in-up stagger-2">
-              <div className="flex items-center gap-4 mb-6">
+                <div className="flex items-center gap-4 mb-6">
                 <div className="w-16 h-16 bg-[var(--color-gold)]/20 rounded-2xl flex items-center justify-center">
                   <Phone size={28} className="text-[var(--color-gold)]" />
                 </div>
                 <div>
                   <p className="text-sm text-slate-500">Visit Our Store</p>
-                  <p className="font-serif font-semibold text-[var(--color-primary)]">Main Market, GT Road</p>
+                  <p className="font-serif font-semibold text-[var(--color-primary)]">Ansals Sushant City</p>
                 </div>
               </div>
               
