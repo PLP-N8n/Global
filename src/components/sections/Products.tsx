@@ -21,7 +21,7 @@ const productCategories: ProductCategory[] = [
     description: "Latest smartphones from premium brands",
     icon: <Smartphone size={28} strokeWidth={1.5} />,
     items: ["Samsung Galaxy", "iPhone", "OnePlus", "Vivo", "Oppo", "Realme"],
-    image: "https://images.unsplash.com/photo-1760587162690-95608c8ab2da?crop=entropy&cs=srgb&fm=jpg&q=85",
+    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80",
   },
   {
     id: "televisions",
@@ -30,7 +30,7 @@ const productCategories: ProductCategory[] = [
     description: "Immersive viewing experience",
     icon: <Tv size={28} strokeWidth={1.5} />,
     items: ["Samsung QLED", "LG OLED", "Sony Bravia", "Mi TV", "OnePlus TV"],
-    image: "https://images.unsplash.com/photo-1756729924301-4e55f111e986?crop=entropy&cs=srgb&fm=jpg&q=85",
+    image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=1200&q=80",
     featured: true,
   },
   {
@@ -40,7 +40,7 @@ const productCategories: ProductCategory[] = [
     description: "Quality appliances for your home",
     icon: <Home size={28} strokeWidth={1.5} />,
     items: ["Refrigerators", "Washing Machines", "ACs", "Geysers"],
-    image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?crop=entropy&cs=srgb&fm=jpg&q=85",
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80",
   },
   {
     id: "audio",
@@ -49,7 +49,7 @@ const productCategories: ProductCategory[] = [
     description: "Premium sound experience",
     icon: <Headphones size={28} strokeWidth={1.5} />,
     items: ["boAt", "JBL", "Sony", "Samsung Buds", "AirPods"],
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?crop=entropy&cs=srgb&fm=jpg&q=85",
+    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80",
   },
 ];
 
