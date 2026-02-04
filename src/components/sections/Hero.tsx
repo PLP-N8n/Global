@@ -15,7 +15,7 @@ export function Hero() {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1651275666236-8ecf57b4c66e?crop=entropy&cs=srgb&fm=jpg&q=85')`,
+          backgroundImage: `url('https://images.unsplash.com/photo-1769153998613-f3be8d6c3500?w=1920&q=80')`,
         }}
       >
         {/* Overlay */}
