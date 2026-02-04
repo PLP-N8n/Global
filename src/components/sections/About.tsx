@@ -15,7 +15,7 @@ export function About() {
           <div className="relative order-2 lg:order-1">
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
               <img
-                src="https://images.unsplash.com/photo-1611755489400-3c53602ab783?crop=entropy&cs=srgb&fm=jpg&q=85"
+                src="https://images.unsplash.com/photo-1593784991251-92ded75ea290?w=800&q=80"
                 alt="Premium Home Theater Setup at Global Telecom Panipat"
                 className="w-full h-full object-cover"
               />
