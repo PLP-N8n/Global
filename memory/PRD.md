@@ -64,7 +64,7 @@ User wanted to modify the existing Global Telecom website (an electronics retail
 - WhatsApp/Call CTAs
 
 ### P1 (High Priority)
-- [ ] Add actual Google Maps embed
+- [x] Add actual Google Maps embed ✅ (Feb 4, 2026)
 - [ ] Add testimonials section
 - [ ] Add product image gallery
 - [ ] Connect actual phone numbers
