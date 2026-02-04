@@ -142,7 +142,7 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-slate-200 animate-fade-in">
+          <div className="lg:hidden py-4 border-t border-slate-200 animate-fade-in bg-white">
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <Link
