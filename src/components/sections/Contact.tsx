@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Button,
-  PhoneIcon,
-  WhatsAppIcon,
-  MapPinIcon,
-  ClockIcon,
-} from "@/components/ui";
+import { Phone, MessageCircle, MapPin, Clock, Navigation } from "lucide-react";
 
 const PHONE_NUMBER = "+91-1234567890";
 const WHATSAPP_NUMBER = "911234567890";
@@ -16,98 +10,100 @@ const STORE_HOURS = {
   sunday: "Sunday: 11:00 AM - 6:00 PM",
 };
 
-/**
- * Contact Section
- *
- * The goal: drive walk-ins, calls, and WhatsApp enquiries.
- * Make it extremely easy to take action.
- *
- * Design: Clear CTAs, large tap targets, no friction.
- */
 export function Contact() {
   return (
-    <section id="contact" className="section bg-[var(--color-ink)] text-[var(--color-paper)]">
-      <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+    <section
+      id="contact"
+      className="section bg-[var(--color-primary)] text-white relative overflow-hidden"
+      data-testid="contact-section"
+    >
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+            backgroundSize: "48px 48px",
+          }}
+        />
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16">
           {/* Contact Info */}
           <div>
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-[var(--color-paper)] mb-4">
-              Get In Touch
+            <span className="overline text-[var(--color-gold)] mb-4 block">Get In Touch</span>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
+              Contact Us
             </h2>
-            <p className="text-xl text-[var(--color-brass-light)] font-medium hindi mb-6">
+            <p className="text-xl text-[var(--color-gold)] font-medium hindi mb-6">
               संपर्क करें
             </p>
 
-            <p className="text-[var(--color-paper-deep)] leading-relaxed mb-8 max-w-md">
+            <p className="text-slate-300 leading-relaxed mb-10 max-w-md">
               Have questions about a product? Want to check availability?
-              Reach out to us — we&apos;re here to help.
+              Reach out to us — we're here to help.
             </p>
 
-            {/* Contact methods */}
+            {/* Contact Methods */}
             <div className="space-y-6 mb-10">
               {/* Phone */}
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-[var(--color-ink-light)] rounded-lg flex items-center justify-center flex-shrink-0">
-                  <PhoneIcon size={24} className="text-[var(--color-paper)]" />
+              <a
+                href={`tel:${PHONE_NUMBER}`}
+                className="flex items-start gap-4 group"
+                data-testid="contact-phone"
+              >
+                <div className="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-[var(--color-gold)] transition-colors">
+                  <Phone size={24} className="text-white" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <p className="font-semibold text-[var(--color-paper)] mb-1">
-                    Call Us
-                  </p>
-                  <a
-                    href={`tel:${PHONE_NUMBER}`}
-                    className="text-[var(--color-paper-deep)] hover:text-[var(--color-paper)] transition-colors text-lg"
-                  >
+                  <p className="font-semibold text-white mb-1">Call Us</p>
+                  <p className="text-slate-300 group-hover:text-white transition-colors text-lg">
                     {PHONE_NUMBER}
-                  </a>
+                  </p>
+                  <p className="text-xs text-slate-500 hindi mt-1">अभी कॉल करें</p>
                 </div>
-              </div>
+              </a>
 
               {/* WhatsApp */}
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-[var(--color-whatsapp)] rounded-lg flex items-center justify-center flex-shrink-0">
-                  <WhatsAppIcon size={24} className="text-white" />
+              <a
+                href={`https://wa.me/${WHATSAPP_NUMBER}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-4 group"
+                data-testid="contact-whatsapp"
+              >
+                <div className="w-14 h-14 bg-[#25D366]/20 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-[#25D366] transition-colors">
+                  <MessageCircle size={24} className="text-[#25D366] group-hover:text-white" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <p className="font-semibold text-[var(--color-paper)] mb-1">
-                    WhatsApp
+                  <p className="font-semibold text-white mb-1">WhatsApp</p>
+                  <p className="text-slate-300 group-hover:text-[#25D366] transition-colors">
+                    Message Us Anytime
                   </p>
-                  <a
-                    href={`https://wa.me/${WHATSAPP_NUMBER}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[var(--color-paper-deep)] hover:text-[#25D366] transition-colors text-lg"
-                  >
-                    Message Us
-                  </a>
+                  <p className="text-xs text-slate-500 hindi mt-1">WhatsApp पर संपर्क करें</p>
                 </div>
-              </div>
+              </a>
 
               {/* Address */}
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-[var(--color-ink-light)] rounded-lg flex items-center justify-center flex-shrink-0">
-                  <MapPinIcon size={24} className="text-[var(--color-paper)]" />
+                <div className="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <MapPin size={24} className="text-[var(--color-gold)]" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <p className="font-semibold text-[var(--color-paper)] mb-1">
-                    Visit Us
-                  </p>
-                  <p className="text-[var(--color-paper-deep)]">
-                    {STORE_ADDRESS}
-                  </p>
+                  <p className="font-semibold text-white mb-1">Visit Us</p>
+                  <p className="text-slate-300">{STORE_ADDRESS}</p>
                 </div>
               </div>
 
               {/* Hours */}
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-[var(--color-ink-light)] rounded-lg flex items-center justify-center flex-shrink-0">
-                  <ClockIcon size={24} className="text-[var(--color-paper)]" />
+                <div className="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Clock size={24} className="text-[var(--color-gold)]" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <p className="font-semibold text-[var(--color-paper)] mb-1">
-                    Store Hours
-                  </p>
-                  <p className="text-[var(--color-paper-deep)] text-sm">
+                  <p className="font-semibold text-white mb-1">Store Hours</p>
+                  <p className="text-slate-300 text-sm">
                     {STORE_HOURS.weekdays}
                     <br />
                     {STORE_HOURS.sunday}
@@ -118,66 +114,76 @@ export function Contact() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                as="a"
+              <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi, I would like to enquire about your products.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                variant="whatsapp"
-                size="lg"
-                icon={<WhatsAppIcon size={22} />}
+                className="btn btn-whatsapp text-base px-8"
+                data-testid="contact-whatsapp-btn"
               >
+                <MessageCircle size={20} strokeWidth={1.5} />
                 WhatsApp Now
-              </Button>
-              <Button
-                as="a"
+              </a>
+              <a
                 href={`tel:${PHONE_NUMBER}`}
-                variant="call"
-                size="lg"
-                icon={<PhoneIcon size={22} />}
+                className="btn text-base px-8 bg-white text-[var(--color-primary)] hover:bg-slate-100"
+                data-testid="contact-call-btn"
               >
+                <Phone size={20} strokeWidth={1.5} />
                 Call Now
-              </Button>
+              </a>
             </div>
           </div>
 
-          {/* Map/Location area */}
+          {/* Map Area */}
           <div className="flex flex-col">
-            {/* Map placeholder */}
-            <div className="flex-1 bg-[var(--color-ink-light)] rounded-lg overflow-hidden min-h-[300px] relative">
-              {/* This would be replaced with an actual Google Maps embed */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                <MapPinIcon
-                  size={48}
-                  className="text-[var(--color-paper-deep)] mb-4"
+            {/* Map Card */}
+            <div className="flex-1 relative rounded-2xl overflow-hidden min-h-[400px] bg-slate-800">
+              {/* Map Background (placeholder - would be Google Maps embed) */}
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-800">
+                {/* Grid pattern */}
+                <div
+                  className="absolute inset-0 opacity-10"
+                  style={{
+                    backgroundImage: `linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)`,
+                    backgroundSize: "40px 40px",
+                  }}
                 />
-                <p className="text-[var(--color-paper-deep)] text-sm mb-2">
-                  [Google Maps Embed]
-                </p>
-                <p className="text-[var(--color-paper-deep)] text-xs">
-                  Main Market, GT Road
-                  <br />
-                  Panipat, Haryana 132103
-                </p>
+              </div>
+
+              {/* Location Marker */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="glass-dark p-6 rounded-2xl text-center max-w-xs">
+                  <div className="w-16 h-16 bg-[var(--color-gold)] rounded-full flex items-center justify-center mx-auto mb-4">
+                    <MapPin size={32} className="text-[var(--color-primary)]" strokeWidth={1.5} />
+                  </div>
+                  <p className="font-serif font-semibold text-white mb-2">Global Telecom</p>
+                  <p className="text-sm text-slate-400">
+                    Main Market, GT Road
+                    <br />
+                    Panipat, Haryana 132103
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* Directions link */}
+            {/* Directions Link */}
             <a
               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(STORE_ADDRESS)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center justify-center gap-2 bg-[var(--color-ink-light)] hover:bg-[var(--color-ink-muted)] text-[var(--color-paper)] px-6 py-3 rounded-lg transition-colors text-sm font-medium"
+              className="mt-4 flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-6 py-4 rounded-xl transition-colors"
+              data-testid="contact-directions"
             >
-              <MapPinIcon size={18} />
+              <Navigation size={18} strokeWidth={1.5} />
               Get Directions on Google Maps
             </a>
           </div>
         </div>
 
         {/* Hindi CTA */}
-        <div className="mt-12 pt-8 border-t border-[var(--color-ink-light)] text-center">
-          <p className="text-lg text-[var(--color-paper-deep)] hindi">
+        <div className="mt-16 pt-8 border-t border-white/10 text-center">
+          <p className="text-lg text-slate-300 hindi">
             किसी भी प्रश्न के लिए हमें कॉल करें या WhatsApp करें।
             <br />
             हम आपकी सेवा में हाज़िर हैं।
