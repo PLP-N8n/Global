@@ -1,48 +1,56 @@
 "use client";
 
-import { ReactNode } from "react";
-import { useInView } from "@/lib/hooks";
+import { useEffect, useRef, useState, ReactNode } from "react";
 
 interface FadeInProps {
   children: ReactNode;
-  className?: string;
   delay?: number;
   direction?: "up" | "down" | "left" | "right" | "none";
+  className?: string;
 }
 
-/**
- * FadeIn Component
- *
- * A wrapper that adds a gentle fade-in animation when the element
- * enters the viewport.
- *
- * Motion Philosophy:
- * - Motion should reinforce clarity and sequencing
- * - Gentle fades and staggered reveals
- * - Respects reduced-motion preferences
- */
 export function FadeIn({
   children,
-  className = "",
   delay = 0,
   direction = "up",
+  className = "",
 }: FadeInProps) {
-  const [ref, isInView] = useInView();
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const getTransform = () => {
-    if (direction === "none") return "translate(0, 0)";
-    const distance = "20px";
     switch (direction) {
       case "up":
-        return `translateY(${distance})`;
+        return "translateY(30px)";
       case "down":
-        return `translateY(-${distance})`;
+        return "translateY(-30px)";
       case "left":
-        return `translateX(${distance})`;
+        return "translateX(30px)";
       case "right":
-        return `translateX(-${distance})`;
+        return "translateX(-30px)";
       default:
-        return "translate(0, 0)";
+        return "none";
     }
   };
 
@@ -51,9 +59,10 @@ export function FadeIn({
       ref={ref}
       className={className}
       style={{
-        opacity: isInView ? 1 : 0,
-        transform: isInView ? "translate(0, 0)" : getTransform(),
-        transition: `opacity 500ms ease ${delay}ms, transform 500ms ease ${delay}ms`,
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "none" : getTransform(),
+        transition: `opacity 0.6s ease, transform 0.6s ease`,
+        transitionDelay: `${delay}ms`,
       }}
     >
       {children}

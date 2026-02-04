@@ -2,7 +2,7 @@
 
 import { forwardRef, ButtonHTMLAttributes, AnchorHTMLAttributes } from "react";
 
-type ButtonVariant = "primary" | "secondary" | "whatsapp" | "call" | "ghost";
+type ButtonVariant = "primary" | "secondary" | "gold" | "whatsapp" | "call" | "ghost" | "glass";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonBaseProps {
@@ -29,50 +29,49 @@ type ButtonProps = ButtonAsButton | ButtonAsLink;
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary: `
-    bg-[var(--color-ink)] text-[var(--color-paper)]
-    hover:bg-[var(--color-ink-light)]
-    active:bg-[#3d3d3d]
+    bg-[var(--color-primary)] text-white
+    hover:bg-[var(--color-primary-light)]
+    hover:transform hover:-translate-y-0.5
+    hover:shadow-lg
   `,
   secondary: `
-    bg-transparent text-[var(--color-ink)]
-    border-2 border-[var(--color-ink)]
-    hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)]
+    bg-transparent text-[var(--color-primary)]
+    border-2 border-[var(--color-primary)]
+    hover:bg-[var(--color-primary)] hover:text-white
+  `,
+  gold: `
+    bg-[var(--color-gold)] text-[var(--color-primary)]
+    hover:bg-[var(--color-gold-light)]
+    hover:transform hover:-translate-y-0.5
+    hover:shadow-[0_8px_24px_rgba(212,175,55,0.3)]
   `,
   whatsapp: `
-    bg-[var(--color-whatsapp)] text-white
-    hover:bg-[var(--color-whatsapp-hover)]
-    active:bg-[#064e45]
+    bg-[#25D366] text-white
+    hover:bg-[#1EBE5D]
+    hover:transform hover:-translate-y-0.5
+    hover:shadow-[0_8px_24px_rgba(37,211,102,0.3)]
   `,
   call: `
     bg-[var(--color-call)] text-white
     hover:bg-[var(--color-call-hover)]
-    active:bg-[#0a3a7a]
   `,
   ghost: `
-    bg-transparent text-[var(--color-ink)]
-    hover:bg-[var(--color-paper-warm)]
+    bg-transparent text-[var(--color-primary)]
+    hover:bg-slate-100
+  `,
+  glass: `
+    bg-white/70 backdrop-blur-xl text-[var(--color-primary)]
+    border border-white/40
+    hover:bg-white/90
   `,
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "px-4 py-2 text-sm min-h-[40px]",
+  sm: "px-5 py-2.5 text-sm min-h-[40px]",
   md: "px-6 py-3 text-base min-h-[48px]",
-  lg: "px-8 py-4 text-lg min-h-[56px]",
+  lg: "px-8 py-4 text-base min-h-[56px]",
 };
 
-/**
- * Button Component
- *
- * A pressable, trust-building button with clear visual weight.
- * Buttons should look pressable, not ornamental.
- *
- * Variants:
- * - primary: Main actions
- * - secondary: Secondary actions with outline style
- * - whatsapp: WhatsApp CTA (green)
- * - call: Phone call CTA (blue)
- * - ghost: Subtle/tertiary actions
- */
 const Button = forwardRef<
   HTMLButtonElement | HTMLAnchorElement,
   ButtonProps
@@ -91,10 +90,10 @@ const Button = forwardRef<
   const baseStyles = `
     inline-flex items-center justify-center gap-2
     font-medium leading-none
-    rounded-md
+    rounded-full
     transition-all duration-200 ease-out
     cursor-pointer
-    focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brass)]
+    focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-gold)]
     disabled:opacity-50 disabled:cursor-not-allowed
   `;
 

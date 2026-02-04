@@ -3,29 +3,31 @@
 import { forwardRef, HTMLAttributes } from "react";
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  variant?: "default" | "elevated" | "outline" | "warm";
+  variant?: "default" | "glass" | "elevated" | "outline";
   padding?: "none" | "sm" | "md" | "lg";
   hover?: boolean;
+  goldBorder?: boolean;
 }
 
 const variantStyles: Record<NonNullable<CardProps["variant"]>, string> = {
   default: `
     bg-white
-    border border-[var(--color-paper-deep)]
-    shadow-sm
+    border border-slate-200
+  `,
+  glass: `
+    bg-white/70
+    backdrop-blur-xl
+    border border-white/40
+    shadow-[0_8px_32px_rgba(0,0,0,0.08)]
   `,
   elevated: `
     bg-white
-    shadow-md
+    shadow-lg
     border-0
   `,
   outline: `
     bg-transparent
-    border-2 border-[var(--color-paper-deep)]
-  `,
-  warm: `
-    bg-[var(--color-paper-warm)]
-    border border-[var(--color-paper-deep)]
+    border-2 border-slate-200
   `,
 };
 
@@ -36,20 +38,13 @@ const paddingStyles: Record<NonNullable<CardProps["padding"]>, string> = {
   lg: "p-8",
 };
 
-/**
- * Card Component
- *
- * A container that feels familiar but not generic.
- * Cards should have clear boundaries and subtle depth.
- *
- * This is a trust interface, not a design experiment.
- */
 const Card = forwardRef<HTMLDivElement, CardProps>(
   (
     {
       variant = "default",
       padding = "md",
       hover = false,
+      goldBorder = false,
       className = "",
       children,
       ...props
@@ -57,12 +52,16 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
     ref
   ) => {
     const baseStyles = `
-      rounded-lg
-      transition-shadow duration-200
+      rounded-2xl
+      transition-all duration-300
     `;
 
     const hoverStyles = hover
-      ? "hover:shadow-md cursor-pointer"
+      ? "hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+      : "";
+
+    const goldBorderStyles = goldBorder
+      ? "border-[var(--color-gold)]/20 hover:border-[var(--color-gold)]/50"
       : "";
 
     const combinedClassName = `
@@ -70,6 +69,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       ${variantStyles[variant]}
       ${paddingStyles[padding]}
       ${hoverStyles}
+      ${goldBorderStyles}
       ${className}
     `.trim().replace(/\s+/g, " ");
 
@@ -83,16 +83,12 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
 
 Card.displayName = "Card";
 
-// Card sub-components for composition
+// Card sub-components
 interface CardHeaderProps extends HTMLAttributes<HTMLDivElement> {}
 
 const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
   ({ className = "", children, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={`mb-4 ${className}`}
-      {...props}
-    >
+    <div ref={ref} className={`mb-4 ${className}`} {...props}>
       {children}
     </div>
   )
@@ -108,7 +104,7 @@ const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(
   ({ as: Component = "h3", className = "", children, ...props }, ref) => (
     <Component
       ref={ref}
-      className={`text-xl font-semibold text-[var(--color-ink)] leading-tight ${className}`}
+      className={`text-xl font-serif font-semibold text-[var(--color-primary)] leading-tight ${className}`}
       {...props}
     >
       {children}
@@ -124,7 +120,7 @@ const CardDescription = forwardRef<HTMLParagraphElement, CardDescriptionProps>(
   ({ className = "", children, ...props }, ref) => (
     <p
       ref={ref}
-      className={`text-[var(--color-ink-muted)] leading-relaxed ${className}`}
+      className={`text-[var(--color-text-muted)] leading-relaxed ${className}`}
       {...props}
     >
       {children}
@@ -152,7 +148,7 @@ const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
   ({ className = "", children, ...props }, ref) => (
     <div
       ref={ref}
-      className={`mt-4 pt-4 border-t border-[var(--color-paper-deep)] ${className}`}
+      className={`mt-4 pt-4 border-t border-slate-200 ${className}`}
       {...props}
     >
       {children}
