@@ -1,0 +1,728 @@
+@import "tailwindcss";
+
+/*
+ * Global Telecom Design System
+ * A trust-driven interface for an established electronics retailer
+ *
+ * Design Philosophy: Local, Established, Trustworthy, Quietly Confident
+ */
+
+/* ============================================
+   DESIGN TOKENS
+   ============================================ */
+
+:root {
+  /* Core Brand Colors - Black Scale (900-100) for depth */
+  --color-ink-900: #000000;
+  --color-ink-800: #0d0d0d;
+  --color-ink-700: #1a1a1a;
+  --color-ink-600: #262626;
+  --color-ink-500: #333333;
+  --color-ink-400: #4d4d4d;
+  --color-ink-300: #666666;
+  --color-ink-200: #858585;
+  --color-ink-100: #a3a3a3;
+
+  /* Legacy aliases */
+  --color-ink: var(--color-ink-800);
+  --color-ink-light: var(--color-ink-700);
+  --color-ink-muted: var(--color-ink-400);
+
+  /* Neutral Backgrounds - Paper Scale with slight warmth */
+  --color-paper-100: #ffffff;
+  --color-paper-200: #fafafa;
+  --color-paper-300: #f5f5f5;
+  --color-paper-400: #ebebeb;
+  --color-paper-500: #d4d4d4;
+  --color-paper-600: #b8b8b8;
+  --color-paper-700: #9a9a9a;
+
+  /* Legacy aliases */
+  --color-paper: var(--color-paper-100);
+  --color-paper-warm: var(--color-paper-300);
+  --color-paper-deep: var(--color-paper-400);
+
+  /* Accent - Gold Scale (50-900) for premium metallic accents */
+  --color-gold-50: #fffdf5;
+  --color-gold-100: #fef9e7;
+  --color-gold-200: #fcefc2;
+  --color-gold-300: #f7df94;
+  --color-gold-400: #e9c85b;
+  --color-gold-500: #d4a84b;
+  --color-gold-600: #c9a227;
+  --color-gold-700: #a88620;
+  --color-gold-800: #876a1a;
+  --color-gold-900: #5c4912;
+
+  /* Legacy aliases (brass now maps to gold) */
+  --color-brass-50: var(--color-gold-50);
+  --color-brass-100: var(--color-gold-100);
+  --color-brass-200: var(--color-gold-200);
+  --color-brass-300: var(--color-gold-300);
+  --color-brass-400: var(--color-gold-400);
+  --color-brass-500: var(--color-gold-500);
+  --color-brass-600: var(--color-gold-600);
+  --color-brass-700: var(--color-gold-700);
+  --color-brass-800: var(--color-gold-800);
+  --color-brass-900: var(--color-gold-900);
+  --color-brass: var(--color-gold-600);
+  --color-brass-light: var(--color-gold-500);
+  --color-brass-dark: var(--color-gold-700);
+
+  /* Direct gold aliases */
+  --color-gold: var(--color-gold-600);
+  --color-gold-light: var(--color-gold-400);
+  --color-gold-dark: var(--color-gold-700);
+
+  /* Muted Accent Colors */
+  --color-terracotta: #a85d3e;
+  --color-terracotta-light: #c47a5a;
+  --color-terracotta-dark: #8a4a31;
+  --color-sage: #6b7c5e;
+  --color-sage-light: #8a9c7a;
+  --color-sage-dark: #556349;
+
+  /* Functional CTAs */
+  --color-whatsapp: #128c7e;
+  --color-whatsapp-hover: #075e54;
+  --color-call: #1565c0;
+  --color-call-hover: #0d47a1;
+
+  /* Semantic - Muted tones */
+  --color-success: #2e7d32;
+  --color-success-muted: #4a8f4e;
+  --color-error: #c62828;
+  --color-error-muted: #d84848;
+
+  /* Typography Scale - Editorial Rhythm */
+  --font-size-xs: 0.75rem;      /* 12px */
+  --font-size-sm: 0.875rem;     /* 14px */
+  --font-size-base: 1rem;       /* 16px */
+  --font-size-lg: 1.125rem;     /* 18px */
+  --font-size-xl: 1.25rem;      /* 20px */
+  --font-size-2xl: 1.5rem;      /* 24px */
+  --font-size-3xl: 1.875rem;    /* 30px */
+  --font-size-4xl: 2.25rem;     /* 36px */
+  --font-size-5xl: 3rem;        /* 48px */
+  --font-size-6xl: 3.75rem;     /* 60px */
+
+  /* Letter Spacing Tokens */
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-caps: 0.1em;
+
+  /* Line Heights - Comfortable Reading */
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+
+  /* Spacing Scale - Editorial Rhythm */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* Border Radius - Subtle, Not Playful */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+
+  /* Shadows - Subtle Depth */
+  --shadow-sm: 0 1px 2px rgba(26, 26, 26, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(26, 26, 26, 0.07), 0 2px 4px -2px rgba(26, 26, 26, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(26, 26, 26, 0.08), 0 4px 6px -4px rgba(26, 26, 26, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(26, 26, 26, 0.1), 0 8px 10px -6px rgba(26, 26, 26, 0.05);
+
+  /* Transitions - Calm & Confident */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* Background texture */
+  --noise-opacity: 0.025;
+}
+
+/* Font Family Definitions */
+:root {
+  --font-literata: "Literata", Georgia, "Times New Roman", serif;
+  --font-atkinson: "Atkinson Hyperlegible", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-tiro-devanagari: "Tiro Devanagari Hindi", "Mangal", sans-serif;
+
+  /* Legacy aliases */
+  --font-source-serif: var(--font-literata);
+  --font-source-sans: var(--font-atkinson);
+  --font-noto-devanagari: var(--font-tiro-devanagari);
+}
+
+/* Tailwind v4 Theme Integration */
+@theme inline {
+  --color-background: var(--color-paper);
+  --color-foreground: var(--color-ink);
+  --color-muted: var(--color-ink-muted);
+
+  --font-serif: var(--font-literata);
+  --font-sans: var(--font-atkinson);
+  --font-hindi: var(--font-tiro-devanagari);
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-atkinson), system-ui, sans-serif;
+  font-size: var(--font-size-base);
+  line-height: var(--leading-normal);
+  min-height: 100vh;
+}
+
+/* Enhanced paper texture overlay (fractalNoise with 3 octaves) */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: var(--noise-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-literata), Georgia, serif;
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  color: var(--color-ink);
+  letter-spacing: var(--tracking-tight);
+}
+
+h1 {
+  font-size: var(--font-size-5xl);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tighter);
+}
+
+h2 {
+  font-size: var(--font-size-4xl);
+}
+
+h3 {
+  font-size: var(--font-size-3xl);
+}
+
+h4 {
+  font-size: var(--font-size-2xl);
+}
+
+h5 {
+  font-size: var(--font-size-xl);
+}
+
+h6 {
+  font-size: var(--font-size-lg);
+}
+
+p {
+  line-height: var(--leading-relaxed);
+  color: var(--color-ink-light);
+}
+
+/* Hindi Typography */
+.hindi, [lang="hi"] {
+  font-family: var(--font-tiro-devanagari), sans-serif;
+  line-height: var(--leading-relaxed);
+}
+
+/* ============================================
+   LINK STYLES
+   ============================================ */
+
+a {
+  color: var(--color-brass);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-brass-dark);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================
+   BUTTON BASE STYLES
+   ============================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-atkinson), system-ui, sans-serif;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  min-height: 48px; /* Large tap target for mobile */
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* Primary Button */
+.btn-primary {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-ink-light);
+}
+
+/* Brass Button */
+.btn-brass {
+  background: linear-gradient(135deg, var(--color-brass-500), var(--color-brass-600));
+  color: white;
+  box-shadow: 0 2px 4px rgba(139, 115, 85, 0.25);
+}
+
+.btn-brass:hover {
+  background: linear-gradient(135deg, var(--color-brass-600), var(--color-brass-700));
+  box-shadow: 0 4px 8px rgba(139, 115, 85, 0.3);
+}
+
+/* WhatsApp CTA */
+.btn-whatsapp {
+  background-color: var(--color-whatsapp);
+  color: white;
+}
+
+.btn-whatsapp:hover {
+  background-color: var(--color-whatsapp-hover);
+}
+
+/* Call CTA */
+.btn-call {
+  background-color: var(--color-call);
+  color: white;
+}
+
+.btn-call:hover {
+  background-color: var(--color-call-hover);
+}
+
+/* Secondary/Outline Button */
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-ink);
+  border: 2px solid var(--color-ink);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+}
+
+/* ============================================
+   CARD STYLES
+   ============================================ */
+
+.card {
+  background-color: white;
+  border: 1px solid var(--color-paper-deep);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Featured Card with brass border */
+.card-featured {
+  position: relative;
+  border: 2px solid var(--color-brass-300);
+  background: linear-gradient(180deg, rgba(249, 246, 241, 0.5) 0%, white 100%);
+}
+
+.card-featured::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-brass-400), var(--color-brass-600), var(--color-brass-400));
+}
+
+/* ============================================
+   SECTION STYLES
+   ============================================ */
+
+.section {
+  padding: var(--space-16) var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: var(--space-24) var(--space-8);
+  }
+}
+
+.section-warm {
+  background-color: var(--color-paper-warm);
+}
+
+.section-deep {
+  background-color: var(--color-paper-deep);
+}
+
+.section-dark {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.section-dark h1,
+.section-dark h2,
+.section-dark h3,
+.section-dark h4,
+.section-dark h5,
+.section-dark h6 {
+  color: var(--color-paper);
+}
+
+.section-dark p {
+  color: var(--color-paper-deep);
+}
+
+/* Layered section background */
+.section-layered {
+  position: relative;
+  background:
+    linear-gradient(180deg, transparent 0%, var(--color-paper-200) 50%, transparent 100%),
+    var(--color-paper);
+}
+
+/* ============================================
+   BACKGROUND TREATMENTS
+   ============================================ */
+
+/* Geometric grid overlay */
+.geometric-grid {
+  position: relative;
+}
+
+.geometric-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--color-ink-100) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-ink-100) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+/* Radial gradient depth */
+.depth-radial {
+  position: relative;
+}
+
+.depth-radial::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(168, 144, 112, 0.08) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+/* Brass gradient utility */
+.brass-gradient {
+  background: linear-gradient(135deg, var(--color-brass-400), var(--color-brass-600));
+}
+
+.brass-gradient-text {
+  background: linear-gradient(135deg, var(--color-brass-500), var(--color-brass-700));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   DECORATIVE ELEMENTS
+   ============================================ */
+
+/* Brass corner brackets */
+.brass-brackets {
+  position: relative;
+}
+
+.brass-brackets::before,
+.brass-brackets::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--color-brass-400);
+  pointer-events: none;
+}
+
+.brass-brackets::before {
+  top: -8px;
+  left: -8px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.brass-brackets::after {
+  bottom: -8px;
+  right: -8px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Decorative line */
+.decorative-line {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.decorative-line::before,
+.decorative-line::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-brass-400), transparent);
+}
+
+/* ============================================
+   CONTAINER
+   ============================================ */
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 var(--space-8);
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.text-serif {
+  font-family: var(--font-literata), Georgia, serif;
+}
+
+.text-sans {
+  font-family: var(--font-atkinson), system-ui, sans-serif;
+}
+
+.text-brass {
+  color: var(--color-brass);
+}
+
+.bg-brass {
+  background-color: var(--color-brass);
+}
+
+.tracking-tight {
+  letter-spacing: var(--tracking-tight);
+}
+
+.tracking-wide {
+  letter-spacing: var(--tracking-wide);
+}
+
+.tracking-caps {
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Animation utilities */
+.fade-in {
+  animation: fadeIn var(--transition-slow) ease forwards;
+}
+
+.slide-up {
+  animation: slideUp var(--transition-slow) ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered animation delays */
+.stagger-1 { animation-delay: 100ms; }
+.stagger-2 { animation-delay: 200ms; }
+.stagger-3 { animation-delay: 300ms; }
+.stagger-4 { animation-delay: 400ms; }
+.stagger-5 { animation-delay: 500ms; }
+
+/* ============================================
+   FOCUS STYLES FOR ACCESSIBILITY
+   ============================================ */
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   SELECTION STYLES
+   ============================================ */
+
+::selection {
+  background-color: var(--color-brass);
+  color: white;
+}
+
+/* ============================================
+   SCROLLBAR STYLES
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-paper-warm);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink-muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-light);
+}
+
+/* ============================================
+   PILL BADGE STYLES
+   ============================================ */
+
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  border-radius: 9999px;
+  background-color: var(--color-paper-warm);
+  color: var(--color-ink-light);
+  transition: all var(--transition-fast);
+}
+
+.badge-pill-brass {
+  background-color: var(--color-brass-100);
+  color: var(--color-brass-700);
+}
+
+.badge-pill-success {
+  background-color: rgba(46, 125, 50, 0.1);
+  color: var(--color-success);
+}
