@@ -2,50 +2,38 @@
 
 import { Transition, Variants } from "motion/react";
 
-/**
- * Motion System for Global Telecom
- *
- * Spring-based transitions and entrance variants
- * for a premium, story-driven UI experience.
- *
- * Motion Philosophy:
- * - Motion should reinforce clarity and sequencing
- * - Springs feel more natural than linear easing
- * - Respect reduced-motion preferences
- */
-
 // ============================================
 // SPRING TRANSITIONS
 // ============================================
 
 export const spring: Transition = {
   type: "spring",
-  stiffness: 400,
-  damping: 30,
+  stiffness: 500,
+  damping: 35,
 };
 
 export const smooth: Transition = {
   type: "spring",
-  stiffness: 300,
+  stiffness: 400,
   damping: 30,
 };
 
 export const gentle: Transition = {
   type: "spring",
-  stiffness: 200,
-  damping: 25,
+  stiffness: 300,
+  damping: 28,
 };
 
 export const quick: Transition = {
   type: "spring",
-  stiffness: 500,
+  stiffness: 600,
   damping: 35,
 };
 
 export const slow: Transition = {
   type: "spring",
-  stiffness: 150,
-  damping: 20,
+  stiffness: 200,
+  damping: 25,
 };
 
 // ============================================
@@ -55,7 +43,7 @@ export const slow: Transition = {
 export const fadeUp: Variants = {
   hidden: {
     opacity: 0,
-    y: 24,
+    y: 40,
   },
   visible: {
     opacity: 1,
@@ -114,11 +102,33 @@ export const slideFromRight: Variants = {
 };
 
 // ============================================
+// HERO TEXT REVEAL
+// ============================================
+
+export const heroTextReveal: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 80,
+    skewY: 3,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    skewY: 0,
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 30,
+    },
+  },
+};
+
+// ============================================
 // STAGGER CONTAINER
 // ============================================
 
 export const staggerContainer = (
-  staggerDelay: number = 0.1,
+  staggerDelay: number = 0.06,
   delayChildren: number = 0
 ): Variants => ({
   hidden: {},

@@ -1,198 +1,144 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
-import {
-  ShieldIcon,
-  TruckIcon,
-  CheckCircleIcon,
-  SectionHeader,
-  FadeIn,
-  IconContainerAnimated,
-  AnimatedCounter,
-} from "@/components/ui";
-import { staggerContainer, staggerItem, viewportOnce } from "@/lib/motion";
+import { AnimatedCounter, SectionHeader, FadeIn, OptimizedImage } from "@/components/ui";
 
-interface Service {
-  icon: React.ReactNode;
-  title: string;
-  titleHi: string;
-  description: string;
-}
+const stats = [
+  { value: 15, suffix: "+", label: "Years of Trust", labelHi: "सालों का भरोसा" },
+  { value: 12, suffix: "+", label: "Brands Available", labelHi: "ब्रांड्स उपलब्ध" },
+  { value: 1000, suffix: "s", label: "Happy Customers", labelHi: "खुश ग्राहक" },
+  { value: 100, suffix: "%", label: "Genuine Products", labelHi: "असली उत्पाद" },
+];
 
-const services: Service[] = [
+const trustPoints = [
   {
-    icon: <ShieldIcon size={28} />,
-    title: "Genuine Products",
-    titleHi: "असली उत्पाद",
+    title: "Genuine products with proper bill",
+    titleHi: "असली उत्पाद, बिल के साथ",
     description:
-      "All products are sourced directly from authorized distributors. Every item comes with manufacturer warranty and GST bill.",
+      "We sell original products with GST bill and official warranty.",
   },
   {
-    icon: <TruckIcon size={28} />,
-    title: "Home Delivery",
-    titleHi: "होम डिलीवरी",
+    title: "Local service and after-sales help",
+    titleHi: "सेवा और सहायता",
     description:
-      "Free delivery within Panipat city limits. Safe packaging and careful handling of all electronics.",
+      "If you face an issue, you can come back to the shop and we will help.",
   },
   {
-    icon: <CheckCircleIcon size={28} />,
-    title: "After-Sales Support",
-    titleHi: "बिक्री के बाद सेवा",
+    title: "Honest guidance in-store",
+    titleHi: "ईमानदार सलाह",
     description:
-      "We stand behind every product we sell. Get help with warranty claims, servicing, and product support.",
+      "We explain options clearly so you can choose what fits your budget.",
+  },
+  {
+    title: "EMI and exchange options",
+    titleHi: "ईएमआई और एक्सचेंज",
+    description:
+      "Ask us about EMI and exchange offers available on select products.",
   },
 ];
 
-const benefits = [
-  "GST billing on all purchases",
-  "Price match with authorized dealers",
-  "Easy EMI options available",
-  "Exchange offers on select products",
-  "Expert product guidance",
+const shopImages = [
+  {
+    src: "/images/shop-front.jpg",
+    alt: "Global Telecom shop front in Panipat",
+    span: "col-span-2 row-span-2",
+  },
+  {
+    src: "/images/shop-interior.jpg",
+    alt: "Inside view of Global Telecom store",
+    span: "",
+  },
+  {
+    src: "/images/shop-front-original.jpg",
+    alt: "Global Telecom storefront, street view",
+    span: "",
+  },
 ];
 
-/**
- * Services Section
- *
- * Communicate the value-adds that make this a trustworthy shop.
- * Focus on practical benefits, not marketing speak.
- *
- * Design: Clear, direct communication. No fluff.
- *
- * Motion:
- * - Connecting visual elements between service cards
- * - AnimatedCounter for "15+" stat
- * - Brass border frame around stat card
- * - Icon pulse animation on scroll
- */
 export function Services() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
-    <section id="services" className="section bg-[var(--color-paper)] depth-radial">
-      <div className="container mx-auto px-6">
-        {/* Section Header */}
-        <SectionHeader
-          title="Why Choose Us"
-          titleHi="हमें क्यों चुनें"
-          subtitle="More than just a store — we're your local electronics partner."
-          showDecorative
-        />
+    <section id="trust" className="section section-paper">
+      {/* Stats Counter Strip */}
+      <div className="bg-[var(--color-paper-200)] border-y border-[rgba(11,12,16,0.08)]">
+        <div className="container py-12 md:py-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat) => (
+              <AnimatedCounter
+                key={stat.label}
+                value={stat.value}
+                suffix={stat.suffix}
+                labelBelow={stat.label}
+                labelBelowHi={stat.labelHi}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
 
-        {/* Services Grid with connecting elements */}
-        <motion.div
-          className="grid md:grid-cols-3 gap-8 md:gap-12 relative"
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-          variants={staggerContainer(0.15, 0)}
-        >
-          {/* Connecting lines (hidden on mobile) */}
-          <div
-            className="hidden md:block absolute top-16 left-1/3 right-1/3 h-px bg-gradient-to-r from-[var(--color-gold-200)] via-[var(--color-gold-400)] to-[var(--color-gold-200)]"
-            aria-hidden="true"
-          />
+      {/* Shop Gallery + Trust Points */}
+      <div className="container py-16 md:py-24">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
 
-          {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              className="text-center relative"
-              variants={staggerItem}
-            >
-              {/* Icon with pulse animation */}
-              <IconContainerAnimated
-                size="lg"
-                variant="outline"
-                className="mx-auto mb-5"
-                pulseOnView
-              >
-                {service.icon}
-              </IconContainerAnimated>
-
-              {/* Connection dot (hidden on mobile) */}
-              {index < services.length - 1 && (
+          {/* Left: Image Tiles */}
+          <FadeIn direction="left">
+            <div className="grid grid-cols-2 gap-3 md:gap-4">
+              {shopImages.map((img) => (
                 <div
-                  className="hidden md:block absolute top-[60px] right-0 translate-x-1/2 w-2 h-2 rounded-full bg-[var(--color-gold)]"
-                  aria-hidden="true"
-                />
-              )}
-
-              {/* Title */}
-              <h3 className="text-xl font-semibold text-[var(--color-ink)] mb-2">
-                {service.title}
-              </h3>
-              <p className="text-sm text-[var(--color-gold)] hindi mb-3">
-                {service.titleHi}
-              </p>
-
-              {/* Description */}
-              <p className="text-[var(--color-ink-muted)] leading-relaxed text-sm max-w-sm mx-auto">
-                {service.description}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Additional benefits with stat card */}
-        <FadeIn delay={200} className="mt-16 bg-[var(--color-paper-warm)] rounded-lg p-8 md:p-10 relative overflow-hidden">
-          {/* Subtle brass gradient overlay */}
-          <div
-            className="absolute inset-0 bg-gradient-to-br from-[var(--color-gold-50)]/50 to-transparent"
-            aria-hidden="true"
-          />
-
-          <div className="grid md:grid-cols-2 gap-8 items-center relative z-10">
-            <div>
-              <h3 className="text-2xl font-serif font-bold text-[var(--color-ink)] mb-4">
-                Shop with Confidence
-              </h3>
-              <motion.ul
-                className="space-y-3"
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportOnce}
-                variants={staggerContainer(0.08, 0.2)}
-              >
-                {benefits.map((benefit) => (
-                  <motion.li
-                    key={benefit}
-                    className="flex items-center gap-3 text-[var(--color-ink-light)]"
-                    variants={staggerItem}
-                  >
-                    <CheckCircleIcon
-                      size={18}
-                      className="text-[var(--color-success)] flex-shrink-0"
-                    />
-                    <span>{benefit}</span>
-                  </motion.li>
-                ))}
-              </motion.ul>
+                  key={img.src}
+                  className={`relative overflow-hidden rounded-xl ${img.span} ${
+                    img.span ? "min-h-[280px] md:min-h-[360px]" : "min-h-[140px] md:min-h-[170px]"
+                  }`}
+                >
+                  <OptimizedImage
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    sizes={img.span
+                      ? "(min-width: 1024px) 40vw, 90vw"
+                      : "(min-width: 1024px) 20vw, 45vw"
+                    }
+                    className="object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                </div>
+              ))}
             </div>
+          </FadeIn>
 
-            {/* Stat card with brass frame */}
-            <div className="text-center md:text-right">
-              <motion.div
-                className="inline-block bg-white rounded-lg p-6 shadow-sm border-2 border-[var(--color-gold-300)] relative"
-                whileHover={shouldReduceMotion ? {} : { y: -4 }}
-                transition={{ type: "spring", stiffness: 400, damping: 25 }}
-              >
-                {/* Brass gradient top line */}
-                <div
-                  className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--color-gold-400)] via-[var(--color-gold-600)] to-[var(--color-gold-400)]"
-                  aria-hidden="true"
-                />
+          {/* Right: Trust Points */}
+          <div>
+            <FadeIn direction="up">
+              <SectionHeader
+                title="Why Locals Trust Us"
+                titleHi="स्थानीय लोग हम पर क्यों भरोसा करते हैं"
+                align="left"
+              />
+            </FadeIn>
 
-                <AnimatedCounter
-                  value={15}
-                  suffix="+"
-                  duration={2000}
-                  labelBelow="Years of Trust"
-                  labelBelowHi="विश्वास के वर्ष"
-                />
-              </motion.div>
+            <div className="space-y-6">
+              {trustPoints.map((point, i) => (
+                <FadeIn key={point.title} direction="up" delay={i * 80}>
+                  <div className="flex gap-4 items-start">
+                    {/* Number indicator */}
+                    <span className="flex-shrink-0 w-8 h-8 rounded-lg bg-[var(--color-gold-100)] text-[var(--color-gold-700)] text-sm font-bold flex items-center justify-center mt-0.5">
+                      {i + 1}
+                    </span>
+                    <div>
+                      <h3 className="text-base font-semibold text-[var(--color-ink-900)] tracking-tight mb-0.5 text-display leading-snug">
+                        {point.title}
+                      </h3>
+                      <p className="text-xs text-[var(--color-ink-400)] hindi mb-1.5" lang="hi">
+                        {point.titleHi}
+                      </p>
+                      <p className="text-sm text-[var(--color-ink-500)] leading-relaxed">
+                        {point.description}
+                      </p>
+                    </div>
+                  </div>
+                </FadeIn>
+              ))}
             </div>
           </div>
-        </FadeIn>
+
+        </div>
       </div>
     </section>
   );

@@ -1,192 +1,132 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
-import {
-  Card,
-  CardContent,
-  SmartphoneIcon,
-  TvIcon,
-  HeadphonesIcon,
-  TruckIcon,
-  ChevronRightIcon,
-  SectionHeader,
-  StaggerContainer,
-  StaggerItem,
-  IconContainer,
-} from "@/components/ui";
-import { staggerContainer, staggerItem, viewportOnce } from "@/lib/motion";
+import Image from "next/image";
+import { SectionHeader, FadeIn } from "@/components/ui";
 
-interface ProductCategory {
+interface ProductCard {
   id: string;
   name: string;
   nameHi: string;
-  description: string;
-  icon: React.ReactNode;
-  items: string[];
+  tagline: string;
+  dark: boolean;
+  bgImage: string;
+  span?: string;
 }
 
-const productCategories: ProductCategory[] = [
+const productCards: ProductCard[] = [
   {
     id: "mobiles",
     name: "Mobile Phones",
-    nameHi: "मोबाइल फ़ोन",
-    description: "Latest smartphones from all major brands",
-    icon: <SmartphoneIcon size={28} />,
-    items: ["Samsung", "Vivo", "Oppo", "Realme", "OnePlus", "iPhone"],
+    nameHi: "मोबाइल फोन",
+    tagline: "Latest smartphones from top brands with warranty",
+    dark: true,
+    bgImage: "/images/product-mobiles.png",
+    span: "md:col-span-2 md:row-span-2",
   },
   {
     id: "televisions",
     name: "Televisions",
     nameHi: "टेलीविज़न",
-    description: "LED, Smart TVs, and home entertainment systems",
-    icon: <TvIcon size={28} />,
-    items: ["Samsung", "LG", "Sony", "Mi", "OnePlus", "TCL"],
+    tagline: "LED & Smart TVs for every budget",
+    dark: false,
+    bgImage: "/images/product-televisions.png",
   },
   {
     id: "appliances",
     name: "Home Appliances",
     nameHi: "घरेलू उपकरण",
-    description: "Quality appliances for your home needs",
-    icon: <TruckIcon size={28} />,
-    items: ["Refrigerators", "Washing Machines", "ACs", "Fans", "Geysers"],
+    tagline: "Fridges, ACs, washing machines & more",
+    dark: true,
+    bgImage: "/images/product-appliances.png",
   },
   {
     id: "accessories",
     name: "Accessories",
     nameHi: "एक्सेसरीज़",
-    description: "Mobile accessories, earphones, and more",
-    icon: <HeadphonesIcon size={28} />,
-    items: ["Earphones", "Chargers", "Cases", "Power Banks", "Speakers"],
+    tagline: "Chargers, earphones, cases & speakers",
+    dark: false,
+    bgImage: "/images/product-accessories.png",
   },
 ];
 
-/**
- * Products Section
- *
- * Showcase product categories with clear, honest presentation.
- * Not a catalog - an introduction to what the store offers.
- *
- * Design: Familiar but not generic cards, clear hierarchy.
- *
- * Motion:
- * - Cards wrapped in StaggerContainer for sequential reveal
- * - Icon containers with gradient backgrounds
- * - Brass accent line at card top on hover
- * - Pill-shaped badges for items
- */
 export function Products() {
-  const shouldReduceMotion = useReducedMotion();
-
   return (
-    <section id="products" className="section bg-[var(--color-paper)] section-layered">
-      <div className="container mx-auto px-6">
-        {/* Section Header with animation */}
+    <section id="products" className="section section-paper">
+      <div className="container">
         <SectionHeader
-          title="What We Offer"
+          title="What You Can Buy"
           titleHi="हमारे उत्पाद"
-          subtitle="Browse our wide selection of electronics and home appliances. All products come with manufacturer warranty and our service guarantee."
-          showDecorative
+          subtitle="We keep everyday electronics in stock. Call or WhatsApp to check availability for a specific model."
+          align="center"
         />
 
-        {/* Product Categories Grid with stagger animation */}
-        <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-          variants={staggerContainer(0.1, 0)}
-        >
-          {productCategories.map((category) => (
-            <motion.div key={category.id} variants={staggerItem}>
-              <Card
-                variant="default"
-                padding="lg"
-                hover
-                className="group h-full relative overflow-hidden"
-              >
-                {/* Brass accent line on hover */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          {productCards.map((card) => {
+            const color = card.dark
+              ? "var(--color-paper-100)"
+              : "var(--color-ink-900)";
+            const kickerClass = card.dark ? "kicker-light" : "kicker-muted";
+            const overlay = card.dark
+              ? "rgba(11,12,16,0.7)"
+              : "rgba(245,242,235,0.7)";
+
+            return (
+              <FadeIn key={card.id} direction="up">
                 <div
-                  className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[var(--color-gold)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  aria-hidden="true"
-                />
+                  className={`${card.span || ""} overflow-hidden rounded-2xl relative group min-h-[280px] md:min-h-[320px] flex items-center justify-center`}
+                >
+                  {/* Background image */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={card.bgImage}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
 
-                <CardContent>
-                  {/* Icon with gradient background */}
-                  <IconContainer
-                    size="md"
-                    variant="gradient"
-                    className="mb-4 group-hover:bg-gradient-to-br group-hover:from-[var(--color-gold-500)] group-hover:to-[var(--color-gold-600)] group-hover:text-white transition-all duration-300"
-                    animate
-                  >
-                    {category.icon}
-                  </IconContainer>
+                  {/* Overlay for text readability */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ backgroundColor: overlay }}
+                    aria-hidden="true"
+                  />
 
-                  {/* Title */}
-                  <h3 className="text-xl font-semibold text-[var(--color-ink)] mb-1">
-                    {category.name}
-                  </h3>
-                  <p className="text-sm text-[var(--color-gold)] hindi mb-3">
-                    {category.nameHi}
-                  </p>
-
-                  {/* Description */}
-                  <p className="text-sm text-[var(--color-ink-muted)] mb-4 leading-relaxed">
-                    {category.description}
-                  </p>
-
-                  {/* Pill-shaped badges for items */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {category.items.slice(0, 4).map((item) => (
-                      <span
-                        key={item}
-                        className="badge-pill"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                    {category.items.length > 4 && (
-                      <span className="badge-pill badge-pill-brass">
-                        +{category.items.length - 4} more
-                      </span>
-                    )}
+                  {/* Text content */}
+                  <div className="relative z-10 p-7 md:p-8 text-center" style={{ color }}>
+                    <p className={`kicker ${kickerClass} mb-2`}>
+                      {card.id}
+                    </p>
+                    <h3 className="text-2xl md:text-3xl font-semibold text-display tracking-tight mb-1" style={{ color }}>
+                      {card.name}
+                    </h3>
+                    <p className="text-sm opacity-70 hindi mb-2" lang="hi">
+                      {card.nameHi}
+                    </p>
+                    <p className="text-sm opacity-70">
+                      {card.tagline}
+                    </p>
                   </div>
+                </div>
+              </FadeIn>
+            );
+          })}
+        </div>
 
-                  {/* Link */}
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center text-sm font-medium text-[var(--color-gold)] hover:text-[var(--color-gold-dark)] transition-colors group/link"
-                  >
-                    Enquire Now
-                    <ChevronRightIcon
-                      size={16}
-                      className="ml-1 group-hover/link:translate-x-1 transition-transform"
-                    />
-                  </a>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Bottom note */}
-        <motion.div
-          className="text-center mt-12"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={viewportOnce}
-          transition={{ delay: 0.4 }}
-        >
-          <p className="text-[var(--color-ink-muted)] text-sm">
-            Can&apos;t find what you&apos;re looking for?{" "}
-            <a
-              href="#contact"
-              className="text-[var(--color-gold)] font-medium hover:underline"
-            >
-              Contact us
-            </a>{" "}
-            and we&apos;ll help you find it.
-          </p>
-        </motion.div>
+        {/* Bajaj Finance EMI Badge */}
+        <FadeIn direction="up">
+          <div className="mt-8 flex items-center justify-center gap-4 p-4 surface-paper">
+            <Image
+              src="/images/bajaj-finance.jpg"
+              alt="Bajaj Finance EMI available"
+              width={120}
+              height={40}
+              className="object-contain"
+            />
+            <p className="text-sm text-[var(--color-ink-500)] font-medium">
+              EMI options available via Bajaj Finance
+            </p>
+          </div>
+        </FadeIn>
       </div>
     </section>
   );

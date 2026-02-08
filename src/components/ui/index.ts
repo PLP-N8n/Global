@@ -39,3 +39,11 @@ export { Divider, VerticalDivider } from "./Divider";
 export { AnimatedCounter, StatCard } from "./AnimatedCounter";
 
 export { IconContainer, IconContainerAnimated } from "./IconContainer";
+
+export { SkeletonLoader } from "./SkeletonLoader";
+
+export { ImageWithFallback } from "./ImageWithFallback";
+
+export { OptimizedImage } from "./OptimizedImage";
+
+export { BrandLogo } from "./BrandLogo";

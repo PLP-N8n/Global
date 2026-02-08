@@ -1,7 +1,7 @@
 "use client";
 
 import { forwardRef, ButtonHTMLAttributes, AnchorHTMLAttributes } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 
 type ButtonVariant = "primary" | "secondary" | "whatsapp" | "call" | "ghost" | "brass" | "gold";
 type ButtonSize = "sm" | "md" | "lg";
@@ -35,42 +35,42 @@ type ButtonProps = ButtonAsButton | ButtonAsLink;
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary: `
-    bg-[var(--color-ink-900)] text-[var(--color-paper)]
+    bg-[var(--color-ink-900)] text-[var(--color-paper-100)]
     hover:bg-[var(--color-ink-700)]
     active:bg-[var(--color-ink-800)]
+    shadow-[0_12px_24px_rgba(11,12,16,0.18)]
   `,
   secondary: `
-    bg-transparent text-[var(--color-ink)]
-    border-2 border-[var(--color-ink)]
-    hover:bg-[var(--color-ink)] hover:text-[var(--color-paper)]
+    bg-transparent text-[var(--color-ink-900)]
+    border border-[rgba(11,12,16,0.35)]
+    hover:bg-[var(--color-ink-900)] hover:text-[var(--color-paper-100)]
   `,
   whatsapp: `
     bg-[var(--color-whatsapp)] text-white
     hover:bg-[var(--color-whatsapp-hover)]
-    active:bg-[#064e45]
+    active:bg-[#0a5f56]
+    shadow-[0_10px_20px_rgba(19,119,102,0.25)]
   `,
   call: `
-    bg-[var(--color-call)] text-white
-    hover:bg-[var(--color-call-hover)]
-    active:bg-[#0a3a7a]
+    bg-[var(--color-ink-900)] text-[var(--color-paper-100)]
+    hover:bg-[var(--color-ink-700)]
+    active:bg-[var(--color-ink-800)]
   `,
   ghost: `
-    bg-transparent text-[var(--color-ink)]
-    hover:bg-[var(--color-paper-warm)]
+    bg-transparent text-[var(--color-ink-900)]
+    hover:bg-[rgba(11,12,16,0.06)]
   `,
   brass: `
-    bg-gradient-to-r from-[var(--color-gold-500)] to-[var(--color-gold-600)] text-[var(--color-ink-900)]
-    hover:from-[var(--color-gold-600)] hover:to-[var(--color-gold-700)]
-    shadow-[0_2px_4px_rgba(201,162,39,0.25)]
-    hover:shadow-[0_4px_8px_rgba(201,162,39,0.3)]
+    bg-[var(--color-gold-400)] text-[var(--color-ink-900)]
+    hover:bg-[var(--color-gold-500)]
+    shadow-[0_12px_22px_rgba(197,122,68,0.25)]
     font-semibold
   `,
   gold: `
-    bg-[var(--color-ink-900)] text-[var(--color-gold)]
-    border-2 border-[var(--color-gold-500)]
-    hover:bg-[var(--color-gold)] hover:text-[var(--color-ink-900)]
-    shadow-[0_2px_4px_rgba(201,162,39,0.2)]
-    hover:shadow-[0_4px_8px_rgba(201,162,39,0.3)]
+    bg-[var(--color-gold-500)] text-[var(--color-ink-900)]
+    hover:bg-[var(--color-gold-400)]
+    shadow-[0_12px_22px_rgba(197,122,68,0.28)]
+    font-bold
   `,
 };
 
@@ -80,25 +80,6 @@ const sizeStyles: Record<ButtonSize, string> = {
   lg: "px-8 py-4 text-lg min-h-[56px]",
 };
 
-/**
- * Button Component
- *
- * A pressable, trust-building button with clear visual weight.
- * Buttons should look pressable, not ornamental.
- *
- * Variants:
- * - primary: Main actions
- * - secondary: Secondary actions with outline style
- * - whatsapp: WhatsApp CTA (green)
- * - call: Phone call CTA (blue)
- * - ghost: Subtle/tertiary actions
- * - brass: Premium accent CTAs with metallic gradient
- *
- * Motion:
- * - Subtle lift on hover (y: -2)
- * - Press feedback on tap (scale: 0.98)
- * - Enhanced shadow on hover
- */
 const Button = forwardRef<
   HTMLButtonElement | HTMLAnchorElement,
   ButtonProps
@@ -114,12 +95,10 @@ const Button = forwardRef<
     ...rest
   } = props;
 
-  const shouldReduceMotion = useReducedMotion();
-
   const baseStyles = `
     inline-flex items-center justify-center gap-2
-    font-medium leading-none
-    rounded-md
+    font-semibold leading-none
+    rounded-[14px]
     transition-all duration-200 ease-out
     cursor-pointer
     focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-gold)]
@@ -143,9 +122,8 @@ const Button = forwardRef<
   );
 
   if (props.as === "a") {
-    const { as, href, target, rel, ...linkRest } = rest as ButtonAsLink & { target?: string; rel?: string };
+    const { href, target, rel, ...linkRest } = rest as ButtonAsLink & { target?: string; rel?: string };
 
-    // Always render motion.a for consistent SSR/client output
     return (
       <motion.a
         ref={ref as React.Ref<HTMLAnchorElement>}
@@ -153,25 +131,19 @@ const Button = forwardRef<
         target={target}
         rel={rel}
         className={combinedClassName}
-        whileHover={shouldReduceMotion ? undefined : { y: -2 }}
-        whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
-        transition={{ type: "spring", stiffness: 400, damping: 25 }}
+        {...linkRest}
       >
         {content}
       </motion.a>
     );
   }
 
-  const { as, ...buttonRest } = rest as ButtonAsButton;
+  const buttonRest = rest as ButtonAsButton;
 
-  // Always render motion.button for consistent SSR/client output
   return (
     <motion.button
       ref={ref as React.Ref<HTMLButtonElement>}
       className={combinedClassName}
-      whileHover={shouldReduceMotion ? undefined : { y: -2 }}
-      whileTap={shouldReduceMotion ? undefined : { scale: 0.98 }}
-      transition={{ type: "spring", stiffness: 400, damping: 25 }}
       {...buttonRest}
     >
       {content}

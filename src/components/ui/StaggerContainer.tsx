@@ -1,8 +1,9 @@
 "use client";
 
 import { ReactNode } from "react";
-import { motion, useReducedMotion, Variants } from "motion/react";
-import { staggerContainer, staggerItem, viewportOnce, gentle } from "@/lib/motion";
+import { motion, Variants } from "motion/react";
+import { usePrefersReducedMotion } from "@/lib/hooks";
+import { staggerContainer, staggerItem, viewportOnce } from "@/lib/motion";
 
 interface StaggerContainerProps {
   children: ReactNode;
@@ -33,11 +34,12 @@ export function StaggerContainer({
   staggerDelay = 0.1,
   delayChildren = 0,
 }: StaggerContainerProps) {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = usePrefersReducedMotion();
+  const reduceMotion = shouldReduceMotion;
 
   // Always use motion.div for consistent SSR/client output
   // Just use different variants based on motion preference
-  const variants: Variants = shouldReduceMotion
+  const variants: Variants = reduceMotion
     ? { hidden: {}, visible: {} }
     : staggerContainer(staggerDelay, delayChildren);
 
@@ -61,10 +63,11 @@ export function StaggerContainer({
  * Each StaggerItem will animate in sequence based on the container's stagger delay.
  */
 export function StaggerItem({ children, className = "" }: StaggerItemProps) {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = usePrefersReducedMotion();
+  const reduceMotion = shouldReduceMotion;
 
   // Always use motion.div for consistent SSR/client output
-  const variants: Variants = shouldReduceMotion
+  const variants: Variants = reduceMotion
     ? { hidden: { opacity: 1 }, visible: { opacity: 1 } }
     : staggerItem;
 
@@ -98,11 +101,12 @@ export function StaggerGrid({
   columns = { sm: 1, md: 2, lg: 4 },
   gap = 6,
 }: StaggerGridProps) {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = usePrefersReducedMotion();
+  const reduceMotion = shouldReduceMotion;
 
   const gridClassName = `grid gap-${gap} grid-cols-1 ${columns.sm ? `sm:grid-cols-${columns.sm}` : ""} ${columns.md ? `md:grid-cols-${columns.md}` : ""} ${columns.lg ? `lg:grid-cols-${columns.lg}` : ""} ${className}`;
 
-  const variants: Variants = shouldReduceMotion
+  const variants: Variants = reduceMotion
     ? { hidden: {}, visible: {} }
     : staggerContainer(staggerDelay, delayChildren);
 

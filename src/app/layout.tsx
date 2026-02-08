@@ -1,30 +1,32 @@
 import type { Metadata } from "next";
+import { Bricolage_Grotesque, Spline_Sans, Tiro_Devanagari_Hindi } from "next/font/google";
 import "./globals.css";
 
-/**
- * Typography System for Global Telecom
- *
- * Fonts are loaded via Google Fonts link tags for build compatibility.
- * Premium font pairing for distinctive, story-driven UI:
- *
- * Literata: Contemporary serif with warmth and ink-trap details
- * - Communicates longevity, authority, and trustworthiness
- * - Fallback: Georgia (excellent editorial serif)
- *
- * Atkinson Hyperlegible: Designed for maximum legibility
- * - Communicates care and accessibility
- * - Clean but not sterile, warm but professional
- * - Fallback: system-ui (modern, readable)
- *
- * Tiro Devanagari Hindi: Professional Hindi typeface
- * - Intentional Hindi support, not an afterthought
- * - Fallback: Mangal
- */
+const display = Bricolage_Grotesque({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-display-var",
+  display: "swap",
+});
+
+const body = Spline_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-body-var",
+  display: "swap",
+});
+
+const hindi = Tiro_Devanagari_Hindi({
+  subsets: ["devanagari"],
+  weight: ["400"],
+  variable: "--font-hindi-var",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Global Telecom | Electronics & Mobile Store in Panipat",
   description:
-    "Your trusted electronics retailer in Panipat, Haryana. Quality mobile phones, TVs, appliances, and expert service since establishment. Visit our store or connect via WhatsApp.",
+    "Local electronics shop in Panipat, Haryana. Phones, TVs, appliances, and accessories. Call or WhatsApp to check availability.",
   keywords: [
     "electronics store Panipat",
     "mobile shop Panipat",
@@ -37,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Global Telecom | Electronics & Mobile Store in Panipat",
     description:
-      "Your trusted electronics retailer in Panipat, Haryana. Quality mobile phones, TVs, appliances, and expert service.",
+      "Local electronics shop in Panipat, Haryana. Phones, TVs, appliances, and accessories.",
     type: "website",
     locale: "en_IN",
   },
@@ -53,17 +55,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        {/* Preconnect to Google Fonts for faster loading */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* Load premium font pairing */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600;7..72,700&family=Atkinson+Hyperlegible:wght@400;700&family=Tiro+Devanagari+Hindi:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="en" className={`${display.variable} ${body.variable} ${hindi.variable}`}>
       <body className="antialiased">
         {children}
       </body>

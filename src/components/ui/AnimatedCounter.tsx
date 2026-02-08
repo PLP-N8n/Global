@@ -14,17 +14,6 @@ interface AnimatedCounterProps {
   labelBelowHi?: string;
 }
 
-/**
- * AnimatedCounter Component
- *
- * Animated number counting for statistics and metrics.
- * Perfect for "15+ Years of Trust" type displays.
- *
- * Motion Philosophy:
- * - Numbers that count up draw attention
- * - Creates sense of achievement and credibility
- * - Respects reduced-motion preferences
- */
 export function AnimatedCounter({
   value,
   suffix = "",
@@ -43,9 +32,6 @@ export function AnimatedCounter({
 
   useEffect(() => {
     if (!isInView || hasAnimated.current || shouldReduceMotion) {
-      if (shouldReduceMotion) {
-        setDisplayValue(value);
-      }
       return;
     }
 
@@ -57,8 +43,6 @@ export function AnimatedCounter({
     const tick = () => {
       const now = Date.now();
       const progress = Math.min((now - startTime) / duration, 1);
-
-      // Easing function (ease-out)
       const easeOut = 1 - Math.pow(1 - progress, 3);
       const current = Math.floor(easeOut * value);
 
@@ -74,6 +58,8 @@ export function AnimatedCounter({
     requestAnimationFrame(tick);
   }, [isInView, value, duration, shouldReduceMotion]);
 
+  const renderedValue = shouldReduceMotion ? value : displayValue;
+
   return (
     <motion.div
       ref={ref}
@@ -83,20 +69,20 @@ export function AnimatedCounter({
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       {labelAbove && (
-        <p className="text-sm text-[var(--color-ink-muted)] mb-2">{labelAbove}</p>
+        <p className="text-xs text-[var(--color-ink-400)] mb-2 uppercase tracking-[0.2em] font-semibold">{labelAbove}</p>
       )}
-      <p className="text-4xl md:text-5xl font-serif font-bold text-[var(--color-brass)]">
+      <p className="text-4xl md:text-5xl font-semibold text-[var(--color-ink-900)]">
         {prefix}
-        {displayValue}
+        {renderedValue}
         {suffix}
       </p>
       {labelBelow && (
-        <p className="text-[var(--color-ink-muted)] text-sm mt-2">
+        <p className="text-[var(--color-ink-500)] text-sm mt-2">
           {labelBelow}
           {labelBelowHi && (
             <>
               <br />
-              <span className="hindi">{labelBelowHi}</span>
+              <span className="hindi" lang="hi">{labelBelowHi}</span>
             </>
           )}
         </p>
@@ -105,11 +91,6 @@ export function AnimatedCounter({
   );
 }
 
-/**
- * StatCard Component
- *
- * A complete stat card with animated counter and brass frame.
- */
 interface StatCardProps extends AnimatedCounterProps {
   featured?: boolean;
 }
@@ -120,16 +101,16 @@ export function StatCard({
 }: StatCardProps) {
   const shouldReduceMotion = useReducedMotion();
 
-  const baseClasses = "bg-white rounded-lg p-6 shadow-sm";
+  const baseClasses = "bg-white rounded-2xl p-6 shadow-sm";
   const featuredClasses = featured
-    ? "border-2 border-[var(--color-brass-300)] relative overflow-hidden"
-    : "border border-[var(--color-paper-deep)]";
+    ? "border-2 border-black relative overflow-hidden"
+    : "border border-neutral-200";
 
   const content = (
     <div className={`${baseClasses} ${featuredClasses}`}>
       {featured && (
         <div
-          className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--color-brass-400)] via-[var(--color-brass-600)] to-[var(--color-brass-400)]"
+          className="absolute top-0 left-0 right-0 h-1 bg-black"
           aria-hidden="true"
         />
       )}
@@ -143,7 +124,7 @@ export function StatCard({
 
   return (
     <motion.div
-      whileHover={{ y: -2, boxShadow: "0 8px 16px rgba(26, 26, 26, 0.08)" }}
+      whileHover={{ y: -2, boxShadow: "0 8px 16px rgba(0, 0, 0, 0.08)" }}
       transition={{ duration: 0.2 }}
     >
       {content}

@@ -11,12 +11,6 @@ interface IconProps {
   "aria-hidden"?: boolean;
 }
 
-const defaultProps: IconProps = {
-  size: 24,
-  className: "",
-  "aria-hidden": true,
-};
-
 export function PhoneIcon({ size = 24, className = "", ...props }: IconProps) {
   return (
     <svg

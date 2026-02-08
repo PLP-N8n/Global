@@ -1,42 +1,47 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useSyncExternalStore } from "react";
+
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+
+const subscribeToReducedMotion = (callback: () => void) => {
+  const mediaQuery = window.matchMedia(REDUCED_MOTION_QUERY);
+  const handler = () => callback();
+
+  if (mediaQuery.addEventListener) {
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }
+
+  mediaQuery.addListener(handler);
+  return () => mediaQuery.removeListener(handler);
+};
+
+const getReducedMotionSnapshot = () =>
+  typeof window !== "undefined" && window.matchMedia(REDUCED_MOTION_QUERY).matches;
+
+const getReducedMotionServerSnapshot = () => false;
 
 /**
  * Hook to detect when an element enters the viewport
- * Used for scroll-triggered animations
- *
- * Motion Philosophy:
- * - Motion should reinforce clarity and sequencing
- * - Respect reduced-motion preferences
- * - One purposeful animation is better than many decorative ones
  */
 export function useInView(
   options: IntersectionObserverInit = {}
 ): [React.RefObject<HTMLDivElement | null>, boolean] {
   const ref = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
 
-    // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    if (prefersReducedMotion) {
-      // If user prefers reduced motion, consider element always in view
-      setIsInView(true);
-      return;
-    }
+    if (prefersReducedMotion) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsInView(true);
-          // Once in view, stop observing (animation plays once)
           observer.unobserve(element);
         }
       },
@@ -52,30 +57,20 @@ export function useInView(
     return () => {
       observer.disconnect();
     };
-  }, [options]);
+  }, [options, prefersReducedMotion]);
 
-  return [ref, isInView];
+  return [ref, prefersReducedMotion || isInView];
 }
 
 /**
  * Hook to check if user prefers reduced motion
  */
 export function usePrefersReducedMotion(): boolean {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(mediaQuery.matches);
-
-    const handler = (event: MediaQueryListEvent) => {
-      setPrefersReducedMotion(event.matches);
-    };
-
-    mediaQuery.addEventListener("change", handler);
-    return () => mediaQuery.removeEventListener("change", handler);
-  }, []);
-
-  return prefersReducedMotion;
+  return useSyncExternalStore(
+    subscribeToReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot
+  );
 }
 
 /**
@@ -93,4 +88,27 @@ export function useSmoothScroll() {
   }, []);
 
   return scrollTo;
+}
+
+/**
+ * Hook to detect scroll direction for header hide/show
+ */
+export function useScrollDirection() {
+  const [scrollDirection, setScrollDirection] = useState<"up" | "down">("up");
+  const [scrollY, setScrollY] = useState(0);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrollY(currentScrollY);
+      setScrollDirection(currentScrollY > lastScrollY.current ? "down" : "up");
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return { scrollDirection, scrollY };
 }

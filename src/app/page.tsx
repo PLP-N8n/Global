@@ -7,40 +7,20 @@ import {
   About,
   Contact,
 } from "@/components/sections";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 
-/**
- * Global Telecom Homepage
- *
- * Design Philosophy:
- * - Local, Established, Trustworthy, Quietly Confident
- * - "This is a real, reliable shop that has been here for years."
- *
- * The interface feels crafted, not automated.
- * Every visual decision answers: "Does this help a local customer
- * trust this shop within 5 seconds?"
- */
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col" style={{ scrollSnapType: "y proximity" }}>
+      <ScrollProgress />
       <Header />
 
       <main className="flex-1">
-        {/* Hero - First impression, establish trust immediately */}
         <Hero />
-
-        {/* Products - What we offer, clear categories */}
         <Products />
-
-        {/* Brands - Legitimacy through partnerships */}
         <Brands />
-
-        {/* Services - Why choose us, value proposition */}
         <Services />
-
-        {/* About - Our story, local roots */}
         <About />
-
-        {/* Contact - Drive action: calls, WhatsApp, visits */}
         <Contact />
       </main>
 

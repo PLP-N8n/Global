@@ -1,10 +1,9 @@
 "use client";
 
 import { forwardRef, HTMLAttributes } from "react";
-import { motion, useReducedMotion } from "motion/react";
 
 interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onDrag'> {
-  variant?: "default" | "elevated" | "outline" | "warm" | "featured";
+  variant?: "default" | "elevated" | "outline" | "dark" | "featured";
   padding?: "none" | "sm" | "md" | "lg";
   hover?: boolean;
 }
@@ -12,7 +11,7 @@ interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onDrag'> {
 const variantStyles: Record<NonNullable<CardProps["variant"]>, string> = {
   default: `
     bg-white
-    border border-[var(--color-paper-deep)]
+    border border-neutral-200
     shadow-sm
   `,
   elevated: `
@@ -22,15 +21,15 @@ const variantStyles: Record<NonNullable<CardProps["variant"]>, string> = {
   `,
   outline: `
     bg-transparent
-    border-2 border-[var(--color-paper-deep)]
+    border-2 border-neutral-200
   `,
-  warm: `
-    bg-[var(--color-paper-warm)]
-    border border-[var(--color-paper-deep)]
+  dark: `
+    bg-black text-white
+    border-0
   `,
   featured: `
     bg-white
-    border-2 border-[var(--color-gold-300)]
+    border-2 border-black
     shadow-md
     relative
     overflow-hidden
@@ -44,19 +43,6 @@ const paddingStyles: Record<NonNullable<CardProps["padding"]>, string> = {
   lg: "p-8",
 };
 
-/**
- * Card Component
- *
- * A container that feels familiar but not generic.
- * Cards should have clear boundaries and subtle depth.
- *
- * This is a trust interface, not a design experiment.
- *
- * Motion:
- * - Subtle lift on hover (y: -4)
- * - Enhanced shadow transitions
- * - Featured variant has brass accent line
- */
 const Card = forwardRef<HTMLDivElement, CardProps>(
   (
     {
@@ -69,15 +55,12 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
     },
     ref
   ) => {
-    const shouldReduceMotion = useReducedMotion();
-
-    const baseStyles = `
-      rounded-lg
+  const baseStyles = `
+      rounded-2xl
       transition-shadow duration-200
     `;
 
-    // Add cursor-pointer for hover cards when reduced motion
-    const hoverStyles = hover && shouldReduceMotion ? "hover:shadow-md cursor-pointer" : "";
+    const hoverStyles = hover ? "hover:shadow-md cursor-pointer" : "";
 
     const combinedClassName = `
       ${baseStyles}
@@ -87,31 +70,12 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       ${className}
     `.trim().replace(/\s+/g, " ");
 
-    // Featured variant brass accent line
     const featuredAccent = variant === "featured" && (
       <div
-        className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--color-gold-400)] via-[var(--color-gold-600)] to-[var(--color-gold-400)]"
+        className="absolute top-0 left-0 right-0 h-1 bg-black"
         aria-hidden="true"
       />
     );
-
-    // Always render motion.div for consistent SSR/client output
-    if (hover) {
-      return (
-        <motion.div
-          ref={ref}
-          className={combinedClassName}
-          whileHover={shouldReduceMotion ? undefined : {
-            y: -4,
-            boxShadow: "0 10px 20px -5px rgba(26, 26, 26, 0.1), 0 4px 8px -4px rgba(26, 26, 26, 0.06)",
-          }}
-          transition={{ type: "spring", stiffness: 400, damping: 25 }}
-        >
-          {featuredAccent}
-          {children}
-        </motion.div>
-      );
-    }
 
     return (
       <div ref={ref} className={combinedClassName} {...props}>
@@ -124,8 +88,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
 
 Card.displayName = "Card";
 
-// Card sub-components for composition
-interface CardHeaderProps extends HTMLAttributes<HTMLDivElement> {}
+type CardHeaderProps = HTMLAttributes<HTMLDivElement>;
 
 const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
   ({ className = "", children, ...props }, ref) => (
@@ -149,7 +112,7 @@ const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(
   ({ as: Component = "h3", className = "", children, ...props }, ref) => (
     <Component
       ref={ref}
-      className={`text-xl font-semibold text-[var(--color-ink)] leading-tight ${className}`}
+      className={`text-xl font-bold text-black leading-tight uppercase ${className}`}
       {...props}
     >
       {children}
@@ -159,13 +122,13 @@ const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(
 
 CardTitle.displayName = "CardTitle";
 
-interface CardDescriptionProps extends HTMLAttributes<HTMLParagraphElement> {}
+type CardDescriptionProps = HTMLAttributes<HTMLParagraphElement>;
 
 const CardDescription = forwardRef<HTMLParagraphElement, CardDescriptionProps>(
   ({ className = "", children, ...props }, ref) => (
     <p
       ref={ref}
-      className={`text-[var(--color-ink-muted)] leading-relaxed ${className}`}
+      className={`text-neutral-500 leading-relaxed ${className}`}
       {...props}
     >
       {children}
@@ -175,7 +138,7 @@ const CardDescription = forwardRef<HTMLParagraphElement, CardDescriptionProps>(
 
 CardDescription.displayName = "CardDescription";
 
-interface CardContentProps extends HTMLAttributes<HTMLDivElement> {}
+type CardContentProps = HTMLAttributes<HTMLDivElement>;
 
 const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
   ({ className = "", children, ...props }, ref) => (
@@ -187,13 +150,13 @@ const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
 
 CardContent.displayName = "CardContent";
 
-interface CardFooterProps extends HTMLAttributes<HTMLDivElement> {}
+type CardFooterProps = HTMLAttributes<HTMLDivElement>;
 
 const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
   ({ className = "", children, ...props }, ref) => (
     <div
       ref={ref}
-      className={`mt-4 pt-4 border-t border-[var(--color-paper-deep)] ${className}`}
+      className={`mt-4 pt-4 border-t border-neutral-200 ${className}`}
       {...props}
     >
       {children}

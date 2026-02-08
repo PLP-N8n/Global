@@ -1,7 +1,8 @@
 "use client";
 
 import { ReactNode } from "react";
-import { motion, useReducedMotion, Variants, Easing } from "motion/react";
+import { motion, Variants, Easing } from "motion/react";
+import { usePrefersReducedMotion } from "@/lib/hooks";
 import { gentle, viewportOnce } from "@/lib/motion";
 
 interface FadeInProps {
@@ -12,33 +13,21 @@ interface FadeInProps {
   distance?: number;
 }
 
-/**
- * FadeIn Component
- *
- * A wrapper that adds a gentle fade-in animation when the element
- * enters the viewport using Framer Motion.
- *
- * Motion Philosophy:
- * - Motion should reinforce clarity and sequencing
- * - Gentle fades and staggered reveals
- * - Respects reduced-motion preferences via useReducedMotion()
- */
 export function FadeIn({
   children,
   className = "",
   delay = 0,
   direction = "up",
-  distance = 24,
+  distance = 40,
 }: FadeInProps) {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion = usePrefersReducedMotion();
+  const reduceMotion = shouldReduceMotion;
 
-  // Get variants based on direction
   const getVariants = (): Variants => {
     const delayInSeconds = delay / 1000;
     const easing: Easing = "easeOut";
 
-    // If reduced motion, use instant transitions
-    if (shouldReduceMotion) {
+    if (reduceMotion) {
       return {
         hidden: { opacity: 1 },
         visible: { opacity: 1 },
@@ -98,7 +87,6 @@ export function FadeIn({
     }
   };
 
-  // Always render motion.div for consistent SSR/client output
   return (
     <motion.div
       className={className}
