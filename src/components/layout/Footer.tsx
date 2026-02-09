@@ -9,6 +9,7 @@ const footerLinks = [
   { label: "Brands", href: "#brands" },
   { label: "Trust", href: "#trust" },
   { label: "About", href: "#about" },
+  { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -31,7 +32,7 @@ export function Footer() {
               Global <span className="text-brass">Telecom</span>
             </span>
           </span>
-          <nav className="flex flex-wrap justify-center gap-4 md:gap-6">
+          <nav aria-label="Footer navigation" className="flex flex-wrap justify-center gap-4 md:gap-6">
             {footerLinks.map((link) => (
               <Link
                 key={link.href}

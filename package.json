@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "deploy": "next build && npx wrangler pages deploy out --project-name global-telecom --branch main"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",

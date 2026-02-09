@@ -32,7 +32,7 @@ export function Hero() {
         <div className="absolute inset-0" aria-hidden="true">
           <OptimizedImage
             src="/images/hero-phone.png"
-            alt=""
+            alt="Global Telecom electronics store in Panipat — smartphones and mobile accessories display"
             fill
             sizes="100vw"
             priority

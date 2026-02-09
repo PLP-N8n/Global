@@ -52,7 +52,7 @@ export function Contact() {
           <div className="grid md:grid-cols-3 gap-8 mb-12 text-center">
             <div>
               <p className="text-[11px] uppercase tracking-[0.22em] text-white/60 font-semibold mb-2">Address</p>
-              <p className="text-white/70 text-sm leading-relaxed">{STORE.address}</p>
+              <address className="text-white/70 text-sm leading-relaxed not-italic">{STORE.address}</address>
             </div>
             <div>
               <p className="text-[11px] uppercase tracking-[0.22em] text-white/60 font-semibold mb-2">Hours</p>

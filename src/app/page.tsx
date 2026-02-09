@@ -5,6 +5,7 @@ import {
   Brands,
   Services,
   About,
+  FAQ,
   Contact,
 } from "@/components/sections";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
@@ -21,6 +22,7 @@ export default function Home() {
         <Brands />
         <Services />
         <About />
+        <FAQ />
         <Contact />
       </main>
 

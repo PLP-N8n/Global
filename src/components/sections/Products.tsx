@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { SectionHeader, FadeIn } from "@/components/ui";
 
 interface ProductCard {
@@ -79,8 +78,7 @@ export function Products() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={card.bgImage}
-                    alt=""
-                    aria-hidden="true"
+                    alt={`${card.name} at Global Telecom Panipat — ${card.tagline}`}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
 
@@ -112,19 +110,34 @@ export function Products() {
           })}
         </div>
 
-        {/* Bajaj Finance EMI Badge */}
+        {/* Credit / EMI Partners */}
         <FadeIn direction="up">
-          <div className="mt-8 flex items-center justify-center gap-4 p-4 surface-paper">
-            <Image
-              src="/images/bajaj-finance.jpg"
-              alt="Bajaj Finance EMI available"
-              width={120}
-              height={40}
-              className="object-contain"
-            />
-            <p className="text-sm text-[var(--color-ink-500)] font-medium">
-              EMI options available via Bajaj Finance
+          <div className="mt-8 surface-paper rounded-2xl p-6">
+            <p className="text-center text-sm text-[var(--color-ink-500)] font-medium mb-4">
+              Easy EMI options available through our finance partners
             </p>
+            <div className="flex items-center justify-center gap-4 flex-wrap">
+              {[
+                { src: "/images/bajaj-finance.jpg", alt: "Bajaj Finance", w: 140 },
+                { src: "/images/hdb-financial.png", alt: "HDB Financial Services", w: 260 },
+                { src: "/images/home-credit.jpg", alt: "Home Credit", w: 100 },
+                { src: "/images/idfc-credit.png", alt: "IDFC First Credit", w: 120 },
+                { src: "/images/tvs-credit.jpeg", alt: "TVS Credit", w: 80 },
+              ].map((lender) => (
+                <div
+                  key={lender.alt}
+                  className="rounded-lg overflow-hidden shadow-sm flex-shrink-0"
+                  style={{ width: lender.w, height: 48 }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={lender.src}
+                    alt={lender.alt}
+                    className={`w-full h-full ${lender.fit === "contain" ? "object-contain" : "object-cover"}`}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </FadeIn>
       </div>

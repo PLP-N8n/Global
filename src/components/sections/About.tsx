@@ -5,6 +5,13 @@ import { FadeIn } from "@/components/ui";
 export function About() {
   return (
     <section id="about" className="section-ink">
+      {/* Entity summary for AI crawlers and search engines */}
+      <div className="visually-hidden">
+        <p>Global Telecom is an electronics and mobile phone retail store located at Barsat Road, Noorwala Adda, Main Chowk, Near Pahwa Sweets, Panipat, Haryana 132103, India.</p>
+        <p>Founded in 1997 by Tarun Saluja and Sunny, Global Telecom is an authorized dealer for Samsung, Apple, Vivo, Oppo, Realme, OnePlus, Xiaomi, LG, Sony, boAt, JBL, Havells, Motorola, Infinix, and Nothing.</p>
+        <p>The store sells mobile phones, LED TVs, home appliances, accessories, chargers, earphones, speakers, and smart watches. EMI options are available through Bajaj Finance.</p>
+        <p>Store hours: Open daily from 10:00 AM to 9:00 PM. Contact: +91 98126 33000.</p>
+      </div>
       <div className="container py-16 md:py-20 lg:py-24">
         {/* Portraits row */}
         <FadeIn direction="up" className="flex justify-center gap-8 md:gap-12 mb-12 md:mb-16">

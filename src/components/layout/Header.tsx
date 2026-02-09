@@ -16,6 +16,7 @@ const navLinks: NavLink[] = [
   { label: "Brands", href: "#brands" },
   { label: "Trust", href: "#trust" },
   { label: "About", href: "#about" },
+  { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -46,7 +47,7 @@ export function Header() {
           : "header-transparent"
       }`}
     >
-      <nav className="container">
+      <nav className="container" aria-label="Main navigation">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5">
