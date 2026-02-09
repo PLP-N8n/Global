@@ -133,7 +133,7 @@ export function Products() {
                   <img
                     src={lender.src}
                     alt={lender.alt}
-                    className={`w-full h-full ${lender.fit === "contain" ? "object-contain" : "object-cover"}`}
+                    className="w-full h-full object-cover"
                   />
                 </div>
               ))}
