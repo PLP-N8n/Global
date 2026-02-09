@@ -19,7 +19,7 @@ describe("Brands", () => {
 
     const { container, getAllByRole } = render(<Brands />);
 
-    expect(getAllByRole("img")).toHaveLength(13);
+    expect(getAllByRole("img")).toHaveLength(15);
     expect(container.querySelector(".grid-cols-3")).not.toBeNull();
   });
 

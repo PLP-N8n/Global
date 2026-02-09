@@ -3,8 +3,8 @@ export const STORE = {
   phone: "+91 98126 33000",
   whatsapp: "919812633000",
   address:
-    "Adda, Barsat Rd, near Pahwa Sweets, Ansals Sushant City, Noorwala, Panipat, Azizullapur, Haryana 132103, India",
-  hours: "Daily: 10:00 AM - 8:00 PM",
+    "Barsat Road, Noorwala Adda, Main Chowk, Near Pahwa Sweets, Panipat, Haryana, India",
+  hours: "Daily: 10:00 AM - 9:00 PM",
   instagram: "@global_telecom__pnp",
   instagramUrl: "https://www.instagram.com/global_telecom__pnp/",
   facebook: "Facebook",

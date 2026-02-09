@@ -22,6 +22,8 @@ const brands: Brand[] = [
   { name: "JBL", logo: "/brands/jbl.png" },
   { name: "Havells", logo: "/brands/havells.png" },
   { name: "Motorola", logo: "/brands/motorola.png" },
+  { name: "Infinix", logo: "/brands/infinix.png" },
+  { name: "Nothing", logo: "/brands/nothing.png" },
 ];
 
 const marqueeItems = [...brands, ...brands];

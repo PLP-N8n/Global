@@ -59,7 +59,7 @@ export function Hero() {
                 variants={heroTextReveal}
                 className="kicker kicker-light mb-4"
               >
-                Panipat - Since 2009
+                Panipat - Since 1997
               </motion.p>
               <motion.h1
                 variants={heroTextReveal}

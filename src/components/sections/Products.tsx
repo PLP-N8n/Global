@@ -25,9 +25,9 @@ const productCards: ProductCard[] = [
   },
   {
     id: "televisions",
-    name: "Televisions",
-    nameHi: "टेलीविज़न",
-    tagline: "LED & Smart TVs for every budget",
+    name: "LED TV's",
+    nameHi: "एलईडी टीवी",
+    tagline: "Smart TVs for every budget",
     dark: false,
     bgImage: "/images/product-televisions.png",
   },
